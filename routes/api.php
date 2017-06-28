@@ -20,8 +20,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
+Route::get('/', 'Api\HomeController@index');
+
+
 Route::prefix('admin')->group(function (){
 
     Route::resource('local', 'Api\LocalController', ['only' => ['index', 'store', 'update', 'destroy', 'show']]);
 
 });
+
+
