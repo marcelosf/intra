@@ -12,12 +12,7 @@ import VueRouter from 'vue-router';
 
 require('../../bootstrap');
 
-window.Vue = require('vue');
-let VueMaterial = require('vue-material');
-let VueResource = require('vue-resource');
-
 Vue.use(VueRouter);
-Vue.use(VueMaterial);
 Vue.use(VueResource);
 
 require('./route/router');

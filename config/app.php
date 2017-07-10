@@ -176,6 +176,12 @@ return [
         // Intranet\Providers\BroadcastServiceProvider::class,
         Intranet\Providers\EventServiceProvider::class,
         Intranet\Providers\RouteServiceProvider::class,
+        Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
+
+        /**
+         * Custom packages
+         */
+        Schneider\OAuthUsp\OAuthUspServiceProvider::class,
 
     ],
 

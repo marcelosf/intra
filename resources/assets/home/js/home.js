@@ -12,13 +12,7 @@ import routerMap from './route/router.map';
 
 require('../../bootstrap');
 
-window.Vue = require('vue');
-let VueMaterial = require('vue-material');
-let VueResource = require('vue-resource');
-
-Vue.use(VueRouter);
-Vue.use(VueMaterial);
-Vue.use(VueResource);
+require('../../bootstrap.custom');
 
 const router = new VueRouter(routerMap);
 

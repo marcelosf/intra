@@ -1,7 +1,7 @@
 @extends('base')
 
 @section('css')
-    <link rel="stylesheet" href="{{ asset('css/vue-material.css') }}">
+
     <link rel="stylesheet" href="{{ asset('css/home.css') }}">
 @endsection
 
@@ -11,7 +11,10 @@
 
     </div>
 
-    <script src="{{ mix('js/home.js') }}"></script>
-
 @endsection
 
+@section('js')
+
+    <script src="{{ asset('js/home.js') }}"></script>
+
+@endsection

@@ -2,72 +2,73 @@
 
     <div>
 
+        <q-layout>
 
+            <div slot="header" class="toolbar white">
 
-            <div>
-
-                <md-toolbar>
-
-                    <md-button class="md-icon-button" @click="toggleSideNav">
-
-                        <md-icon>menu</md-icon>
-
-                    </md-button>
-
-                    <h2 class="md-title">INTRANET</h2>
-
-                </md-toolbar>
-
-                <md-sidenav class="md-left" ref="sidenav" @toggle="toggle" @close="close('Left')">
-
-                    <md-toolbar class="md-large">
-
-                        <div class="md-toolbar-container">
-
-                            <h3 class="md-title">Sidenav content</h3>
-
-                        </div>
-
-                    </md-toolbar>
-
-                    <p>Side</p>
-
-                </md-sidenav>
+                <q-toolbar-title :padding="2">Logo</q-toolbar-title>
 
             </div>
 
+            <q-drawer>
 
+                <menu-drawer-component></menu-drawer-component>
+
+            </q-drawer>
+
+
+            <transition name="content-fade" mode="out-in">
+
+                <router-view class="layout-view"></router-view>
+
+            </transition>
+
+            <div slot="footer" class="toolbar bg-grey-2">
+
+                IAG - Instituto de Astronomia, Geofísica e Ciências Atmosféricas | Rua do Matão, 1226 - Cidade Universitária - São Paulo - CEP 05508-090 SP Tel 55 (11) 3091-4762 Fax 55 (11) 3091-2801
+
+            </div>
+
+        </q-layout>
 
     </div>
 
 </template>
 
+
 <script>
 
-    export default{
+    import HeadercComponent from '../../../common/components/Header.vue';
+    import MenuDrawerComponent from '../../../common/components/MenuDrawer.vue';
 
-        created() {
+    export default {
 
-            console.log('Home created');
+        data() {
+
+            return {
+
+                menuItems: [
+                    {icon:'home', text: 'Home', link: 'home.index'},
+                    {icon:'account_balance', text: 'Diretoria', link: 'home.directory'},
+                    {icon:'school', text: 'Colegiados', link:'home.collegiate'},
+                    {icon:'mail', text: 'E-mail', link:'home.email'},
+                    {icon:'computer', text: 'Suporte', link:'home.support'},
+                    {icon:'build', text: 'Serviços', link:'home.services'},
+                    {icon:'photo_camera', text: 'Imagens', link:'home.images'}
+
+                ]
+
+            }
 
         },
 
-        data(){
-            return{
-                msg:'hello vue'
-            }
-        },
+        components: {
 
-        methods: {
-
-            toggleSideNav() {
-
-                console.log('toggled');
-
-                this.$refs.sidenav.toggle();
-
-            }
+            'header-component': HeadercComponent,
+            'menu-drawer-component': MenuDrawerComponent
 
         }
+
     }
+
 </script>

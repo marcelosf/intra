@@ -1,6 +1,11 @@
+.content-fade-enter-active, .component-fade-leave-active {
 
-// Icons
-@import url(https://fonts.googleapis.com/icon?family=Material+Icons);
+  transition: opacity .5s ease;
 
-// Fonts
-@import url(//fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic);
+}
+
+.content-fade-enter, .content-fade-leave-to {
+
+  opacity: 0;
+
+}
