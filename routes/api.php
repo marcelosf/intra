@@ -30,3 +30,12 @@ Route::prefix('admin')->group(function (){
 });
 
 
+Route::group(['middleware' => 'oauth_usp'], function () {
+
+    Route::get('oauth/login', 'Api\OAuthLoginController@oauthLogin')->name('oauth_login');
+
+    Route::get('oauth/logout', 'Api\OAuthLoginController@oauthLogout')->name('oauth_logout');
+
+    Route::get('oauth/refresh', 'Api\OAuthLoginController@refreshToken')->name('oauth_refresh');
+
+});
