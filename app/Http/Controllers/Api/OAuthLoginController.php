@@ -134,4 +134,33 @@ class OAuthLoginController extends OAuthUspController
 
     }
 
+
+    /**
+     * Refresh Token.
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function refreshToken(Request $request)
+    {
+
+        $token = Auth::guard('api')->refresh();
+
+        return $this->sendOAuthLoginResponse($request, $token);
+
+    }
+
+    /**
+     * Log the user out.
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function oauthLogout()
+    {
+
+        Auth::guard('api')->logout();
+
+        return response()->json([], 204);
+
+    }
+
 }
