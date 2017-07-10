@@ -177,6 +177,7 @@ return [
         Intranet\Providers\EventServiceProvider::class,
         Intranet\Providers\RouteServiceProvider::class,
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
+        Barryvdh\Cors\ServiceProvider::class,
 
         /**
          * Custom packages
