@@ -2,7 +2,7 @@
 
     <div>
 
-        <div class="layout-padding full-height bg-grey-3">
+        <div>
 
             <div class="row">
 
@@ -10,23 +10,21 @@
 
             </div>
 
-            <div class="row gutter sm-column" v-for="row in rows">
+            <v-card v-for="card in cards" :key="card.weight">
 
-                <div v-for="card in row.cards" class="width-3of3">
+                <v-card-media :src="card.image" height="100px"></v-card-media>
 
-                    <div  class="card width-1of3">
+                <v-card-title primary-title>
 
-                        <div class="card-title bg-white ">{{ card.title }}</div>
+                    <div>
 
-                        <img :src="[card.image]">
+                        <h3 class="headline mb-0">{{card.title}}</h3>
 
                     </div>
 
-                </div>
+                </v-card-title>
 
-                <div class="offset-"></div>
-
-            </div>
+            </v-card>
 
         </div>
 
@@ -43,14 +41,11 @@
             return {
 
 
-                rows: [
-
-                    {
-
                         cards: [
 
                             {
 
+                                weight: 0,
                                 title: 'Carreira dos Funcionário',
                                 content: 'Carreida dos functionários Técenicos e administrativos',
                                 image: 'http://wallpapercave.com/wp/wp1813090.png',
@@ -60,7 +55,7 @@
                             },
 
                             {
-
+                                weight: 1,
                                 title: 'Lista Triplice',
                                 content: 'Escolha da lista triplice para diretor do IAG',
                                 image: 'http://wallpapercave.com/wp/wp1813090.png',
@@ -70,7 +65,7 @@
                             },
 
                             {
-
+                                weight: 2,
                                 title: 'IAG 2020',
                                 content: 'Plano Diretor IAG 2020',
                                 image: 'http://wallpapercave.com/wp/wp1813090.png',
@@ -80,16 +75,13 @@
                             },
 
 
-                        ]
 
-                    },
 
-                    {
 
-                        cards: [
 
                             {
 
+                                weight: 3,
                                 title: 'Previdencia Complementar',
                                 content: 'Previdencia Complementar PREVICOM',
                                 image: 'http://wallpapercave.com/wp/wp1813090.png',
@@ -100,6 +92,7 @@
 
                             {
 
+                                weight: 4,
                                 title: 'Carreira',
                                 content: 'Carreida dos functionários Técenicos e administrativos',
                                 image: 'http://wallpapercave.com/wp/wp1813090.png',
@@ -110,6 +103,7 @@
 
                             {
 
+                                weight: 5,
                                 title: 'Asistências',
                                 content: 'Carreida dos functionários Técenicos e administrativos',
                                 image: 'http://wallpapercave.com/wp/wp1813090.png',
@@ -119,9 +113,6 @@
                             },
 
 
-                        ]
-
-                    }
 
 
                 ]

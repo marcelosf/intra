@@ -1,45 +1,17 @@
 <template>
 
-    <div>
+        <div>
 
-        <q-layout>
-
-            <div slot="header" class="toolbar white">
-
-                <q-toolbar-title :padding="2">Logo</q-toolbar-title>
-
-            </div>
-
-            <q-drawer>
-
-                <menu-drawer-component></menu-drawer-component>
-
-            </q-drawer>
+            <template-component></template-component>
 
 
-            <transition name="content-fade" mode="out-in">
-
-                <router-view class="layout-view"></router-view>
-
-            </transition>
-
-            <div slot="footer" class="toolbar bg-grey-2">
-
-                IAG - Instituto de Astronomia, Geofísica e Ciências Atmosféricas | Rua do Matão, 1226 - Cidade Universitária - São Paulo - CEP 05508-090 SP Tel 55 (11) 3091-4762 Fax 55 (11) 3091-2801
-
-            </div>
-
-        </q-layout>
-
-    </div>
+        </div>
 
 </template>
 
-
 <script>
 
-    import HeadercComponent from '../../../common/components/Header.vue';
-    import MenuDrawerComponent from '../../../common/components/MenuDrawer.vue';
+    import templateComponent from '../../../common/components/Template.vue';
 
     export default {
 
@@ -64,8 +36,7 @@
 
         components: {
 
-            'header-component': HeadercComponent,
-            'menu-drawer-component': MenuDrawerComponent
+            'template-component': templateComponent
 
         }
 

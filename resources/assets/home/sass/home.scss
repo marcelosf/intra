@@ -1,11 +1,7 @@
-.content-fade-enter-active, .component-fade-leave-active {
+#home #home .container {
 
-  transition: opacity .5s ease;
-
-}
-
-.content-fade-enter, .content-fade-leave-to {
-
-  opacity: 0;
+  min-height:700px;
+  overflow: hidden;
+  z-index: 0;
 
 }

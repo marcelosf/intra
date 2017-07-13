@@ -17,8 +17,13 @@ const { mix } = require('laravel-mix');
 
     mix.sass('./resources/assets/admin/sass/admin.scss', 'public/css');
     mix.sass('./resources/assets/home/sass/home.scss', 'public/css');
+    mix.sass('./resources/assets/common/sass/common.scss', 'public/css');
 
 
 
     mix.sourceMaps();
-    mix.browserSync();
+    mix.browserSync({
+
+        proxy: '192.168.10.10:8000'
+
+    });

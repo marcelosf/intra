@@ -1,7 +1,7 @@
-require('quasar-framework/dist/quasar.mat.css');
+require('vuetify/dist/vuetify.min.css');
 
 import Vue from 'vue';
-import Quasar from 'quasar-framework';
+import Vuetify from 'vuetify';
 import VueRouter from 'vue-router';
 import VueResource from 'vue-resource';
 
@@ -9,6 +9,6 @@ import VueResource from 'vue-resource';
  * Vue Configurations
  */
 window.Vue = Vue;
-Vue.use(Quasar);
+Vue.use(Vuetify);
 Vue.use(VueRouter);
 Vue.use(VueResource);

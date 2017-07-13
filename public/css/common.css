@@ -1,4 +1,10 @@
-@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);@import url(https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons);
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity .5s;
+}
 
-
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
 
