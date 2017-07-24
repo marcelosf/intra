@@ -52,7 +52,7 @@
 
             <v-spacer></v-spacer>
 
-            <v-btn icon>
+            <v-btn icon @click.native.stop="login()">
 
                 <v-icon class="white--text">account_circle</v-icon>
 
@@ -88,6 +88,8 @@
 
 <script>
 
+    import {OAuth} from '../../resources/oauth';
+
     export default {
 
         data() {
@@ -118,7 +120,16 @@
 
         methods: {
 
+            login()
+            {
 
+                OAuth.getRequestToken().then((response) => {
+
+                    console.log(response.data);
+
+                });
+
+            }
 
         }
 

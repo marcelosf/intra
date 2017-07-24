@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 class OAuthLoginController extends OAuthUspController
 {
 
+
     public function __construct()
     {
 
@@ -72,11 +73,13 @@ class OAuthLoginController extends OAuthUspController
 
         $this->clearLoginAttempts($request);
 
-        return response()->json([
+        $token = response()->json([
 
             'token' => $token
 
         ]);
+
+        dd($token);
 
     }
 

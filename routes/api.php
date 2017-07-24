@@ -13,29 +13,41 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-
-    return $request->user();
-
-});
-
 
 Route::get('/', 'Api\HomeController@index');
 
 
-Route::prefix('admin')->group(function (){
+Route::middleware(['cors'])->group(function (){
 
-    Route::resource('local', 'Api\LocalController', ['only' => ['index', 'store', 'update', 'destroy', 'show']]);
+    Route::middleware(['api_oauth_usp'])->group(function () {
+
+        Route::get('oauth/login', 'Api\OAuthLoginController@oauthLogin')->name('api_oauth_login');
+
+        Route::get('oauth/request-token', 'Api\OAuthLoginController@getRequestTokenResource')->name('api_oauth_request-token');
+
+        Route::get('oauth/logout', 'Api\OAuthLoginController@oauthLogout')->name('api_oauth_logout');
+
+        Route::get('oauth/refresh', 'Api\OAuthLoginController@refreshToken')->name('api_oauth_refresh');
+
+    });
+
+
+    /**
+     * Administration routes
+     */
+    Route::prefix('admin')->group(function (){
+
+        Route::resource('local', 'Api\LocalController', ['only' => ['index', 'store', 'update', 'destroy', 'show']]);
+
+    });
 
 });
 
 
-Route::group(['middleware' => 'oauth_usp'], function () {
 
-    Route::get('oauth/login', 'Api\OAuthLoginController@oauthLogin')->name('oauth_login');
 
-    Route::get('oauth/logout', 'Api\OAuthLoginController@oauthLogout')->name('oauth_logout');
+Route::middleware('auth:api')->get('/user', function (Request $request) {
 
-    Route::get('oauth/refresh', 'Api\OAuthLoginController@refreshToken')->name('oauth_refresh');
+    return $request->user();
 
 });

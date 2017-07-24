@@ -2,6 +2,7 @@
 
 namespace Intranet\Http;
 
+use Barryvdh\Cors\HandleCors;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -37,12 +38,26 @@ class Kernel extends HttpKernel
         ],
 
 
-        'oauth_usp' => [
+        'oauth' => [
+
             \Intranet\Http\Middleware\EncryptCookies::class,
             \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
             \Illuminate\Session\Middleware\StartSession::class,
             \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+
+        ],
+
+        'oauth_usp' => [
+            'oauth',
             \Schneider\OAuthUsp\app\Http\Middleware\OAuthUsp::class,
+
+        ],
+
+
+        'api_oauth_usp' => [
+
+            'oauth',
+            \Intranet\Http\Middleware\ApiOAuthUsp::class,
 
         ],
 
@@ -68,5 +83,7 @@ class Kernel extends HttpKernel
         'can' => \Illuminate\Auth\Middleware\Authorize::class,
         'guest' => \Intranet\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
+        'custom_cors' => \Intranet\Http\Middleware\Cors::class,
+        'cors' => \Barryvdh\Cors\HandleCors::class,
     ];
 }

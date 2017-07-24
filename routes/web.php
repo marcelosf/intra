@@ -20,16 +20,6 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 
-Route::group(['middleware' => 'oauth_usp'], function () {
-
-    Route::get('oauth/login', 'Api\OAuthLoginController@oauthLogin')->name('oauth_login');
-
-});
-
-
-
-
-
 Route::get('/oauth-logedin', function () {
 
     echo 'Logged in';

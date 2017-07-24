@@ -5,11 +5,14 @@ namespace Intranet\Http\Controllers\Api;
 use Intranet\Model\Local\Local;
 use Illuminate\Http\Request;
 use Intranet\Http\Controllers\Controller;
+use Barryvdh\Cors\HandleCors;
 
 class LocalController extends Controller
 {
 
     protected $local;
+
+
 
 
     public function __construct(Local $local)

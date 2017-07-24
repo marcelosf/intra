@@ -75,13 +75,14 @@ return [
     
     /*
     |--------------------------------------------------------------------------
-    | OAuth Client Parameters.
+    | OAuth Client Id.
     |--------------------------------------------------------------------------
     |
     | The Id from the URL registered on Webservice
     |
     */
 
-    'callback_id' => '6',
+    'callback_id' => '7',
+
 
 ];
