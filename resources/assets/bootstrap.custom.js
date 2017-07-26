@@ -12,3 +12,7 @@ window.Vue = Vue;
 Vue.use(Vuetify);
 Vue.use(VueRouter);
 Vue.use(VueResource);
+
+Vue.http.options.root = 'http://192.168.10.10:8000/api';
+
+require('./resources/interceptors');

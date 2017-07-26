@@ -31,6 +31,10 @@ Route::middleware(['cors'])->group(function (){
 
     });
 
+    Route::get('oauth/get-request-token', 'Api\JWTOAuthLoginController@getRequestToken')->name('api_jwt_request_token');
+
+    Route::post('oauth/get-resource', 'Api\JWTOAuthLoginController@getUspResource')->name('api_jwt_resource');
+
 
     /**
      * Administration routes

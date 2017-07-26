@@ -9,6 +9,8 @@ import CommissionsComponent from '../components/Commisions.vue';
 import CommunityComponent from '../components/Community.vue';
 import CceComponent from '../components/Cce.vue';
 import RolesComponent from '../components/Roles.vue';
+import LocalStorage from '../../../common/services/localStorage';
+import OAuthCallbackHandle from '../../../common/services/OAuthCallbackHandle';
 
 export default {
 
@@ -98,6 +100,22 @@ export default {
                     path: 'roles',
                     name: 'home.roles',
                     component: RolesComponent
+
+                },
+
+                {
+
+                    path: 'oauth-callback',
+                    name: 'oauth-callback',
+                    beforeEnter: (to, from, next) => {
+
+                        LocalStorage.set('verifier_token', to.query.oauth_verifier);
+
+                        OAuthCallbackHandle.callbackHandle();
+
+                        return next();
+
+                    }
 
                 }
 

@@ -12,6 +12,9 @@ class OAuthLoginController extends OAuthUspController
 {
 
 
+    protected $redirectTo = '/';
+
+
     public function __construct()
     {
 

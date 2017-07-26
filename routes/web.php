@@ -25,3 +25,13 @@ Route::get('/oauth-logedin', function () {
     echo 'Logged in';
 
 });
+
+Route::middleware('oauth_usp')->group(function () {
+
+    Route::get('oauth/login', '\Schneider\OAuthUsp\app\Http\Controllers\OAuthUspController@oauthLogin');
+
+    Route::get('oauth/logout', '\Schneider\OAuthUsp\app\Http\Controllers\OAuthUspController@logout');
+
+    Route::get('dashboard', '\Schneider\OAuthUsp\app\Http\Controllers\OAuthUspController@dashboard');
+
+});
