@@ -82,7 +82,7 @@ class OAuthLoginController extends OAuthUspController
 
         ]);
 
-        dd($token);
+        return compact('token');
 
     }
 

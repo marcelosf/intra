@@ -4,7 +4,6 @@ namespace Intranet\Http\Controllers\Api;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Lang;
-use Intranet\Model\JWTOAuthUser;
 use Schneider\OAuthUsp\app\Http\Controllers\JWTOAuthUspController;
 use Illuminate\Http\Request;
 
@@ -18,10 +17,10 @@ class JWTOAuthLoginController extends JWTOAuthUspController
     public function __construct()
     {
 
-        config(['auth.guards.api.driver' => 'jwt']);
-
-        config(['auth.providers.users.model' => JWTOAuthUser::class]);
-
+//        config(['auth.guards.api.driver' => 'jwt']);
+//
+//        config(['auth.providers.users.model' => JWTOAuthUser::class]);
+//
         config(['auth.providers.users.driver' => 'oauth_usp_user']);
 
     }
@@ -82,7 +81,7 @@ class JWTOAuthLoginController extends JWTOAuthUspController
 
         ]);
 
-        dd($token);
+        return $token;
 
     }
 
@@ -166,6 +165,13 @@ class JWTOAuthLoginController extends JWTOAuthUspController
         Auth::guard('api')->logout();
 
         return response()->json([], 204);
+
+    }
+
+    public function getUser()
+    {
+
+        return Auth::guard('api')->user();
 
     }
 

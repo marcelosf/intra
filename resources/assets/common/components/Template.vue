@@ -88,8 +88,7 @@
 
 <script>
 
-    import {OAuth} from '../../resources/oauth';
-    import LocalStorage from '../../common/services/localStorage';
+    import Auth from '../../common/services/auth';
 
     export default {
 
@@ -123,17 +122,17 @@
 
             login() {
 
-                    OAuth.getRequestToken().then((response) => {
+                Auth.login();
 
-                        LocalStorage.setObject('oauth_token', response.data.token);
+            },
 
-                        window.location.href = response.data.url;
+            logout() {
 
-                    });
-
-                }
+                Auth.logout();
 
             }
+
+        }
 
     }
 

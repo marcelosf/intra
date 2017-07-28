@@ -1,5 +1,9 @@
 import LocalStorage from '../common/services/localStorage';
 
+const TOKEN = 'oauth_token';
+const VERIFY = 'verifier_token';
+const REQUEST_TOKEN = 'request_token';
+
 export class OAuth {
 
     static getRequestToken() {
@@ -10,9 +14,9 @@ export class OAuth {
 
     static getResource() {
 
-        let token = LocalStorage.getObject('oauth_token');
+        let token = LocalStorage.getObject(TOKEN);
 
-        let verifier = LocalStorage.get('verifier_token');
+        let verifier = LocalStorage.get(VERIFY);
 
         let tokenInfo = {
 
@@ -26,6 +30,22 @@ export class OAuth {
 
 
         return Vue.http.post('oauth/get-resource', tokenInfo);
+
+    };
+
+    static clearOAuthTokens() {
+
+        LocalStorage.remove(TOKEN);
+
+        LocalStorage.remove(VERIFY);
+
+        LocalStorage.remove(REQUEST_TOKEN);
+
+    };
+
+    static getUser() {
+
+        return Vue.http.get('oauth/user');
 
     }
 

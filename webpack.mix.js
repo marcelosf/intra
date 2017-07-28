@@ -12,11 +12,11 @@ const { mix } = require('laravel-mix');
  */
 
 
-    mix.js('./resources/assets/admin/js/admin.js', 'public/js');
-    mix.js('./resources/assets/home/js/home.js', 'public/js');
+    mix.js('./resources/assets/modules/admin/js/admin.js', 'public/js');
+    mix.js('./resources/assets/modules/home/js/home.js', 'public/js');
 
-    mix.sass('./resources/assets/admin/sass/admin.scss', 'public/css');
-    mix.sass('./resources/assets/home/sass/home.scss', 'public/css');
+    mix.sass('./resources/assets/modules/admin/sass/admin.scss', 'public/css');
+    mix.sass('./resources/assets/modules/home/sass/home.scss', 'public/css');
     mix.sass('./resources/assets/common/sass/common.scss', 'public/css');
 
 
