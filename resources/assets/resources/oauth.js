@@ -45,7 +45,19 @@ export class OAuth {
 
     static getUser() {
 
-        return Vue.http.get('oauth/user');
+        return Vue.http.get('oauth/jwt-user');
+
+    };
+
+    static isAuthenticated() {
+
+        return Vue.http.get('oauth/check-user-auth');
+
+    };
+
+    static logout() {
+
+        return Vue.http.get('oauth/jwt-logout');
 
     }
 

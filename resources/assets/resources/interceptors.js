@@ -7,3 +7,12 @@ Vue.http.interceptors.push((request, next) => {
     return next();
 
 });
+
+
+Vue.http.interceptors.push((request, next) => {
+
+    console.log(request);
+
+    return next();
+
+});

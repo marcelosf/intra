@@ -39,9 +39,11 @@ Route::middleware(['cors'])->group(function (){
 
         Route::get('oauth/jwt-logout', 'Api\JWTOAuthLoginController@oauthLogout')->name('api_jwt_logout');
 
-        Route::get('oauth/user', 'Api\JWTOAuthLoginController@getUser')->name('api_jwt_get-user');
+        Route::get('oauth/jwt-user', 'Api\JWTOAuthLoginController@getUser')->name('api_jwt_get-user');
 
     });
+
+    Route::get('oauth/check-user-auth', 'Api\JWTOAuthLoginController@check');
 
 
     /**
