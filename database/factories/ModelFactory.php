@@ -24,6 +24,7 @@ $factory->define(Intranet\User::class, function (Faker\Generator $faker) {
 });
 
 
+
 $factory->define(Intranet\Model\Local\Local::class, function(Faker\Generator $faker) {
 
     return [
@@ -32,6 +33,16 @@ $factory->define(Intranet\Model\Local\Local::class, function(Faker\Generator $fa
         'name'  => $faker->randomNumber(3),
         'type'  => $faker->randomElement(['Sala', 'Corredor', 'Bolsão', 'Sala de aula', 'Estacionamento']),
         'department' => $faker->randomElement(['Astronomia', 'Geofísica', 'Ciências Atmosféricas'])
+    ];
+
+});
+
+//Epi Seeder
+
+$factory->define(Intranet\Model\Manutencao\Epi::class, function (\Faker\Generator $faker) {
+
+    return [
+        'equipamento' => $faker->randomElement(['Óculos', 'Luvas', 'Protetor Auricular', 'Perneira' ])->unique()
     ];
 
 });
