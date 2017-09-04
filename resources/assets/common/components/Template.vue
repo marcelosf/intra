@@ -24,7 +24,7 @@
 
                 <v-divider></v-divider>
 
-                <v-list-tile ripple v-model="activeItem" v-for="item in items" :key="item" :to="{ name: item.link }">
+                <v-list-tile ripple v-model="activeItem" v-for="item in items" :key="item.id" :to="{ name: item.link }">
 
                     <v-list-tile-action>
 
@@ -99,17 +99,17 @@
                 drawer: true,
 
                 items: [
-                    {icon: 'account_balance', text: 'Diretoria', link: 'home.directory'},
-                    {icon: 'school', text: 'Colegiados', link: 'home.collegiate'},
-                    {icon: 'send', text: 'Comissões', link: 'home.commissions'},
-                    {icon: 'email', text: 'E-mail', link: 'home.email'},
-                    {icon: 'computer', text: 'Suporte', link: 'home.support'},
-                    {icon: 'build', text: 'Serviços', link: 'home.services'},
-                    {icon: 'book', text: 'Normas', link: 'home.roles'},
-                    {icon: 'send', text: 'CCE', link: 'home.cce'},
-                    {icon: 'photo_camera', text: 'Imagens', link: 'home.images'},
-                    {icon: 'perm_identity', text: 'Comunidade', link: 'home.community'},
-                    {icon: 'send', text: 'ASIAG', link: 'home.community'}
+                    {id:1, icon: 'account_balance', text: 'Diretoria', link: 'home.directory'},
+                    {id:2, icon: 'school', text: 'Colegiados', link: 'home.collegiate'},
+                    {id:3, icon: 'send', text: 'Comissões', link: 'home.commissions'},
+                    {id:4, icon: 'email', text: 'E-mail', link: 'home.email'},
+                    {id:5, icon: 'computer', text: 'Suporte', link: 'home.support'},
+                    {id:6, icon: 'build', text: 'Serviços', link: 'home.services'},
+                    {id:7, icon: 'book', text: 'Normas', link: 'home.roles'},
+                    {id:8, icon: 'send', text: 'CCE', link: 'home.cce'},
+                    {id:9, icon: 'photo_camera', text: 'Imagens', link: 'home.images'},
+                    {id:10, icon: 'perm_identity', text: 'Comunidade', link: 'home.community'},
+                    {id:11, icon: 'send', text: 'ASIAG', link: 'home.community'}
                 ],
 
                 activeItem: false,
