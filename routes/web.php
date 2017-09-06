@@ -11,9 +11,16 @@
 |
 */
 
+
+/**
+ * Home SPA
+ */
 Route::get('/', function () {
     return view('home.index');
 });
+
+
+
 
 Auth::routes();
 

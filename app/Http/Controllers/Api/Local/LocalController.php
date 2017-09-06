@@ -1,11 +1,10 @@
 <?php
 
-namespace Intranet\Http\Controllers\Api;
+namespace Intranet\Http\Controllers\Api\Local;
 
 use Intranet\Model\Local\Local;
 use Illuminate\Http\Request;
 use Intranet\Http\Controllers\Controller;
-use Barryvdh\Cors\HandleCors;
 
 class LocalController extends Controller
 {

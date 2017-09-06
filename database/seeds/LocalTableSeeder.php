@@ -13,8 +13,6 @@ class LocalTableSeeder extends Seeder
     public function run()
     {
 
-        DB::table('local')->truncate();
-
         factory(Intranet\Model\Local\Local::class, 10)->create();
 
     }

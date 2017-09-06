@@ -22,7 +22,7 @@ export default {
 
     getObject(key) {
 
-        return JSON.parse(window.localStorage[key] || null);
+        return JSON.parse(window.localStorage[key] || null );
 
     },
 

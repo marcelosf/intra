@@ -4,7 +4,7 @@
 
         <v-layout row wrap>
 
-            <h4>Serviços</h4>
+            <h6>Serviços</h6>
 
         </v-layout>
 
@@ -12,35 +12,19 @@
 
             <v-flex xs3 v-for="(s, i) in services" :key="i" class="mb-4 px-3">
 
-                <v-card height="200px">
+                <v-card hover @click="cardClick(s.link)" height="200px">
 
-                    <v-card-media class="white--text" :src="s.media" height="100px">
+                    <v-card-media :src="s.media" height="120px"></v-card-media>
 
-                        <v-container fill-height fluid>
-
-                            <v-layout fill-height>
-
-                                <v-flex xs12 align-end flexbox>
-
-                                    <span class="headline">{{ s.title }}</span>
-
-                                </v-flex>
-
-                            </v-layout>
-
-                        </v-container>
-
-                    </v-card-media>
-
-                    <v-card-title>
+                    <v-card-title primary-title>
 
                         <div>
 
-                            <span>Whitsunday Island, Whitsunday Islands</span>
+                            <div class="title">{{ s.title }}</div>
 
                         </div>
 
-                    </v-card-title>
+                    </v-card-title primary-title>
 
                 </v-card>
 
@@ -65,7 +49,7 @@
                     {title: 'Audiovisual', media: '', link: ''},
                     {title: 'Copa', media: '', link: ''},
                     {title: 'LIme', media: '', link: ''},
-                    {title: 'Manutenção', media: 'https://cdn.evbuc.com/eventlogos/110429189/facilitiesmanagement2.jpg', link: ''},
+                    {title: 'Manutenção', media: 'https://cdn.evbuc.com/eventlogos/110429189/facilitiesmanagement2.jpg', link: 'manutencao.index'},
                     {title: 'Patrimônio', media: '', link: ''},
                     {title: 'Plotagem', media: '', link: ''},
                     {title: 'Transporte', media: '', link: ''},
@@ -73,6 +57,16 @@
                     {title: 'Chaves', media: '', link: ''},
 
                 ]
+
+            }
+
+        },
+
+        methods: {
+
+            cardClick(link){
+
+                this.$router.push({name: link});
 
             }
 

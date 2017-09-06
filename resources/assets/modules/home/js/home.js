@@ -2,9 +2,13 @@
  * Imports
  */
 
+import Vue from 'vue';
 import VueRouter from 'vue-router';
 import routerMap from '../../../common/routes/router.main';
 import Auth from '../../../common/services/auth';
+import {store} from '../../../store/store';
+import AsyncComputed from 'vue-async-computed';
+
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -13,15 +17,13 @@ import Auth from '../../../common/services/auth';
  */
 
 require('../../../bootstrap');
-
 require('../../../bootstrap.custom');
+
+Vue.use(AsyncComputed);
 
 const router = new VueRouter(routerMap);
 
 router.beforeEach((to, from, next) => {
-
-    console.log('access: ' + to.meta.requireAuth);
-    console.log('auth: ' + Auth.check());
 
     if(to.meta.requireAuth && !Auth.check()) {
 
@@ -33,10 +35,12 @@ router.beforeEach((to, from, next) => {
 
 });
 
+
 new Vue({
 
     el: '#app',
     router: router,
+    store,
     template: '<v-app><router-view></router-view></v-app>'
 
 });

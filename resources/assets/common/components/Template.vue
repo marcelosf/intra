@@ -52,11 +52,20 @@
 
             <v-spacer></v-spacer>
 
-            <v-btn icon @click.native.stop="login()">
+            <div v-show="!authenticated">
 
-                <v-icon class="white--text">account_circle</v-icon>
+                <oauth-component></oauth-component>
 
-            </v-btn>
+            </div>
+
+            <div v-show="authenticated">
+
+                {{ username }}
+
+                <auth-component></auth-component>
+
+            </div>
+
 
         </v-toolbar>
 
@@ -89,8 +98,16 @@
 <script>
 
     import Auth from '../../common/services/auth';
+    import AuthComponent from '../../common/components/Auth.vue';
+    import OAuthComponent from '../../common/components/OAuth.vue';
 
     export default {
+
+        created() {
+
+            this.$store.commit('user', )
+
+        },
 
         data() {
 
@@ -114,9 +131,32 @@
 
                 activeItem: false,
 
+                user: Auth.user
+
             }
 
         },
+
+        computed: {
+
+            username() {
+
+//                return this.user.data ? this.user.data.name : '';
+
+                return this.$store.getters.username;
+
+            },
+
+            authenticated() {
+
+//                return this.user.check;
+
+                return this.$store.state.user.user.check;
+
+            }
+
+        },
+
 
         methods: {
 
@@ -124,13 +164,16 @@
 
                 Auth.login();
 
-            },
-
-            logout() {
-
-                Auth.logout();
-
             }
+
+        },
+
+
+        components: {
+
+            'auth-component': AuthComponent,
+
+            'oauth-component': OAuthComponent
 
         }
 

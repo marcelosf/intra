@@ -168,10 +168,30 @@ class JWTOAuthLoginController extends JWTOAuthUspController
 
     }
 
+    /**
+     * Get the user data
+     *
+     * @return mixed
+     */
     public function getUser()
     {
 
         return Auth::guard('api')->user();
+
+    }
+
+
+    /**
+     * Verify if the user is authenticated.
+     *
+     * @return mixed
+     */
+    public function check()
+    {
+
+       $authenticated = Auth::guard('api')->check();
+
+        return compact('authenticated');
 
     }
 

@@ -39,9 +39,11 @@ Route::middleware(['cors'])->group(function (){
 
         Route::get('oauth/jwt-logout', 'Api\JWTOAuthLoginController@oauthLogout')->name('api_jwt_logout');
 
-        Route::get('oauth/user', 'Api\JWTOAuthLoginController@getUser')->name('api_jwt_get-user');
+        Route::get('oauth/jwt-user', 'Api\JWTOAuthLoginController@getUser')->name('api_jwt_get-user');
 
     });
+
+    Route::get('oauth/check-user-auth', 'Api\JWTOAuthLoginController@check');
 
 
     /**
@@ -49,7 +51,18 @@ Route::middleware(['cors'])->group(function (){
      */
     Route::prefix('admin')->group(function (){
 
-        Route::resource('local', 'Api\LocalController', ['only' => ['index', 'store', 'update', 'destroy', 'show']]);
+        Route::resource('local', 'Api\Local\LocalController', ['only' => ['index', 'store', 'update', 'destroy', 'show']]);
+
+    });
+
+    /**
+     * Manutenção Routes
+     */
+    Route::prefix('manutencao')->group(function(){
+
+        Route::get('/', 'Api\Manutencao\ManutencaoController@index')->name('manutencao.index');
+
+        Route::get('/show/{id}', 'Api\Manutencao\ManutencaoController@show')->name('manutencao.show');
 
     });
 
