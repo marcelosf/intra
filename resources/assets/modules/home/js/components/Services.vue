@@ -49,7 +49,7 @@
                     {title: 'Audiovisual', media: '', link: ''},
                     {title: 'Copa', media: '', link: ''},
                     {title: 'LIme', media: '', link: ''},
-                    {title: 'Manutenção', media: 'https://cdn.evbuc.com/eventlogos/110429189/facilitiesmanagement2.jpg', link: 'manutencao.index'},
+                    {title: 'Manutenção', media: 'https://cdn.evbuc.com/eventlogos/110429189/facilitiesmanagement2.jpg', link: 'maintenence.index'},
                     {title: 'Patrimônio', media: '', link: ''},
                     {title: 'Plotagem', media: '', link: ''},
                     {title: 'Transporte', media: '', link: ''},

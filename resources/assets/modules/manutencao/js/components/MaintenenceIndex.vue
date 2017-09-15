@@ -1,14 +1,8 @@
 <template>
 
-    <v-container grid-list-xs grid-list-md>
+    <v-container grid-list-xs>
 
         <v-layout row wrap>
-
-            <v-flex xs12>
-
-                <h6>Manutenção</h6>
-
-            </v-flex>
 
             <v-flex xs12 class="align-center">
 
@@ -45,7 +39,7 @@
 
                     </v-data-table>
 
-                    <div class="text-xs-right pt-4 pb-4">
+                    <div class="text-xs-left pt-4 pb-4">
 
                         <v-pagination :length="totalPages" v-model="pagination.page" circle></v-pagination>
 
@@ -63,8 +57,11 @@
 
 <script>
 
+    import VIcon from "../../../../../../node_modules/vuetify/src/components/VIcon/VIcon.vue";
+
     export default {
 
+        components: {VIcon},
         mounted() {
 
             this.loadServices();
