@@ -15,7 +15,7 @@ export const HomeRoutes = [
 
     {
 
-        path: 'directory',
+        path: 'diretoria',
         name: 'home.directory',
         meta: { requireAuth: true },
         component: DirectoryComponent,
@@ -24,7 +24,7 @@ export const HomeRoutes = [
 
     {
 
-        path: 'collegiate',
+        path: 'colegiados',
         name: 'home.collegiate',
         meta: { requireAuth: false },
         component: CollegiateComponent
@@ -42,7 +42,7 @@ export const HomeRoutes = [
 
     {
 
-        path: 'services',
+        path: 'servico',
         name: 'home.services',
         meta: { requireAuth: false },
         component: ServicesComponent,
@@ -51,7 +51,7 @@ export const HomeRoutes = [
 
     {
 
-        path: 'support',
+        path: 'suporte',
         name: 'home.support',
         meta: { requireAuth: false },
         component: SupportComponent
@@ -60,7 +60,7 @@ export const HomeRoutes = [
 
     {
 
-        path: 'images',
+        path: 'imagens',
         name: 'home.images',
         meta: { requireAuth: false },
         component: ImagesComponent
@@ -69,7 +69,7 @@ export const HomeRoutes = [
 
     {
 
-        path: 'commissions',
+        path: 'comissoes',
         name: 'home.commissions',
         meta: { requireAuth: false },
         component: CommissionsComponent
@@ -78,7 +78,7 @@ export const HomeRoutes = [
 
     {
 
-        path: 'community',
+        path: 'comunidade',
         name: 'home.community',
         meta: { requireAuth: false },
         component: CommunityComponent
@@ -96,7 +96,7 @@ export const HomeRoutes = [
 
     {
 
-        path: 'roles',
+        path: 'normas',
         name: 'home.roles',
         meta: { requireAuth: false },
         component: RolesComponent

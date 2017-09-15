@@ -2,7 +2,7 @@
 
     <div>
 
-        <v-navigation-drawer class="grey lighten-5" persistent floating height="100%" clipped enable-resize-watcher v-model="drawer">
+        <v-navigation-drawer class="grey lighten-5" persistent floating height="100%" clipped absolute enable-resize-watcher v-model="drawer">
 
             <v-list dense class="pt-3 grey lighten-5">
 
@@ -49,6 +49,10 @@
             <v-toolbar-side-icon class="white--text" @click.native.stop="drawer = !drawer"></v-toolbar-side-icon>
 
             <v-toolbar-title>Intranet</v-toolbar-title>
+
+            <v-spacer></v-spacer>
+
+            <v-toolbar-title>{{ sectionTitle }}</v-toolbar-title>
 
             <v-spacer></v-spacer>
 
@@ -152,6 +156,12 @@
 //                return this.user.check;
 
                 return this.$store.state.user.user.check;
+
+            },
+
+            sectionTitle() {
+
+                return this.$route.meta.title;
 
             }
 

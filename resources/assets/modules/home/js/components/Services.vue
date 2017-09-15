@@ -12,19 +12,31 @@
 
             <v-flex xs3 v-for="(s, i) in services" :key="i" class="mb-4 px-3">
 
-                <v-card hover @click="cardClick(s.link)" height="200px">
+                <v-card hover height="200px">
 
-                    <v-card-media :src="s.media" height="120px"></v-card-media>
+                    <v-card-media @click="cardClick(s.link)" :src="s.media" height="150px">
 
-                    <v-card-title primary-title>
+                        <span class="headline white--text pl-3" v-text="s.title"></span>
 
-                        <div>
+                    </v-card-media>
 
-                            <div class="title">{{ s.title }}</div>
+                    <v-card-actions>
 
-                        </div>
+                        <v-spacer></v-spacer>
 
-                    </v-card-title primary-title>
+                        <v-btn v-if="s.add" icon :to="{name: s.add}">
+
+                            <v-icon>add</v-icon>
+
+                        </v-btn>
+
+                        <v-btn v-if="s.list" icon :to="{name: s.list}">
+
+                            <v-icon>list</v-icon>
+
+                        </v-btn>
+
+                    </v-card-actions>
 
                 </v-card>
 
@@ -49,7 +61,13 @@
                     {title: 'Audiovisual', media: '', link: ''},
                     {title: 'Copa', media: '', link: ''},
                     {title: 'LIme', media: '', link: ''},
-                    {title: 'Manutenção', media: 'https://cdn.evbuc.com/eventlogos/110429189/facilitiesmanagement2.jpg', link: 'manutencao.index'},
+                    {
+                        title: 'Manutenção',
+                        media: 'https://cdn.evbuc.com/eventlogos/110429189/facilitiesmanagement2.jpg',
+                        link: 'maintenence.index',
+                        add: 'maintenence.new',
+                        list: 'maintenence.index'
+                    },
                     {title: 'Patrimônio', media: '', link: ''},
                     {title: 'Plotagem', media: '', link: ''},
                     {title: 'Transporte', media: '', link: ''},

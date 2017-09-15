@@ -11,8 +11,6 @@ Vue.http.interceptors.push((request, next) => {
 
 Vue.http.interceptors.push((request, next) => {
 
-    console.log(request);
-
     return next();
 
 });

@@ -1,36 +1,36 @@
 <template>
 
-    <v-container grid-list-xs grid-list-md>
+    <v-container grid-list-xs>
 
         <v-layout row wrap>
-
-            <v-flex xs12>
-
-                <h6>Manutenção</h6>
-
-            </v-flex>
 
             <v-flex xs12 class="align-center">
 
                 <v-card>
 
-                    <v-card-title>
-
-                        <h6>Lista de Chamados</h6>
-
-                        <v-spacer></v-spacer>
+                    <v-toolbar class="white" light>
 
                         <v-text-field append-icon="search" label="Busca" single-line hide-details v-model="search"></v-text-field>
 
-                    </v-card-title>
+                        <v-spacer></v-spacer>
+
+                        <v-btn flat :to="{name: 'maintenence.new'}">
+
+                            <v-icon>add</v-icon>
+
+                            Novo Chamado
+
+                        </v-btn>
+
+                    </v-toolbar>
 
                     <v-data-table
                             v-bind:headers="headers"
-                            :items="items"
+                            v-bind:items="items"
                             v-bind:search="search"
                             :loading="loading"
                             v-bind:pagination.sync="pagination"
-                            :total-items="totalItems"
+                            hide-actions
                     >
 
                         <template slot="items" scope="props">
@@ -45,15 +45,17 @@
 
                     </v-data-table>
 
+                    <div class="text-xs-left pt-4 pb-4">
+
+                        <v-pagination :length="totalPages" v-model="pagination.page" circle></v-pagination>
+
+                    </div>
+
                 </v-card>
-
-
 
             </v-flex>
 
         </v-layout>
-
-
 
     </v-container>
 
@@ -61,13 +63,17 @@
 
 <script>
 
+    import VIcon from "../../../../../../node_modules/vuetify/src/components/VIcon/VIcon.vue";
+
     export default {
 
+        components: {VIcon},
         mounted() {
 
             this.loadServices();
 
         },
+
 
         data() {
 
@@ -75,21 +81,21 @@
 
                 headers: [
 
-                    {text: 'Nº Serviço', align: 'left', sortable: true, value: 'codigo'},
-                    {text: 'Responsável', align: 'left', sortable: true, value: 'responsavel'},
-                    {text: 'Solicitante', align: 'left', sortable: true, value: 'solicitante'},
-                    {text: 'Entrada', align: 'left', sortable: true, value: 'created_at'},
-                    {text: 'Status', align: 'left', sortable: true, value: 'status'},
+                    {text: 'Nº Serviço', align: 'left', value: 'codigo'},
+                    {text: 'Responsável', align: 'left', value: 'responsavel'},
+                    {text: 'Solicitante', align: 'left', value: 'solicitante'},
+                    {text: 'Entrada', align: 'left', value: 'created_at'},
+                    {text: 'Status', align: 'left', value: 'status'},
 
                 ],
 
                 items: [],
 
+                search: '',
+
                 pagination: {},
 
-                totalItems: 0,
-
-                search: '',
+                totalPages: 1,
 
                 loading: true
 
@@ -97,37 +103,35 @@
 
         },
 
-        watch: {
 
-            pagination: {
+        computed: {
 
-                handler() {
+            pages() {
 
-                    this.loading = true;
+                let pag = this.pagination;
 
-                    this.loadServices();
+                if (pag.rowsPerPage > 0) {
 
-                },
+                    return Math.ceil((pag.totalItems / pag.rowsPerPage));
 
-                deep: true
+                }
 
             }
 
         },
 
+
         methods: {
 
             loadServices() {
 
+                this.loading = true;
+
                 this.servicesResource().then((response) => {
 
-                    let filter = this.filter(response.data.solicitacoes);
+                    console.log(response.data.solicitacoes);
 
-                    this.items = filter.fItems;
-
-                    this.totalItems = filter.total;
-
-                    this.loading = false;
+                    this.paginate(response.data.solicitacoes);
 
                 });
 
@@ -139,55 +143,19 @@
 
             },
 
-            filter(items) {
+            paginate(items) {
 
-                const { sortBy, descending, page, rowsPerPage } = this.pagination;
+                this.pagination.sortBy = 'codigo';
 
-                let fItems = items;
+                this.pagination.rowsPerPage = 10;
 
-                const total = fItems.length;
+                this.pagination.totalItems = items.length;
 
-                if(this.pagination.sortBy) {
+                this.loading = false;
 
-                    fItems = fItems.sort((a,b) => {
+                this.items = items;
 
-                        const sortA = a[sortBy];
-
-                        const sortB = b[sortBy];
-
-                        if(descending) {
-
-                            if(sortA < sortB) return 1;
-
-                            if(sortA > sortB) return -1;
-
-                            return 0
-
-                        } else {
-
-                            if(sortA < sortB) return -1;
-
-                            if(sortA > sortB) return 1;
-
-                        }
-                    });
-
-                }
-
-                if (rowsPerPage > 0) {
-
-                    fItems = fItems.slice((page -1) * rowsPerPage, page * rowsPerPage);
-
-                }
-
-                if (this.search)
-                {
-
-                    console.log(this.search);
-
-                }
-
-                return { fItems, total };
+                this.totalPages = this.pages;
 
             }
 

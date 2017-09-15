@@ -13,7 +13,7 @@ class SolicitacaoTableseeder extends Seeder
     public function run()
     {
 
-        factory(Solicitacao::class, 1)->create();
+        factory(Solicitacao::class, 30)->create();
 
     }
 }
