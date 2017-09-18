@@ -35,7 +35,7 @@
 
                         <template slot="items" scope="props">
 
-                            <td>{{ props.item.codigo }}</td>
+                            <td> <v-btn icon :to="{name: 'maintenence.show', params: {id: props.item.id}}"><v-icon>more_vert</v-icon></v-btn> {{ props.item.codigo }}</td>
                             <td class="text-xs-left">{{ props.item.responsavel.name }}</td>
                             <td class="text-xs-left">{{ props.item.solicitante.name }}</td>
                             <td class="text-xs-left">{{ props.item.created_at }}</td>
