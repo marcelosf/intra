@@ -1,42 +1,93 @@
 <template>
 
-    <v-container grid-list-xs>
+    <v-container grid-list-md>
 
         <v-card>
 
-            <v-toolbar class="white" light>
+            <v-tabs centered fixed>
 
-                <v-toolbar-title>Chamado {{ code }}</v-toolbar-title>
+                <v-toolbar class="white">
 
-                <v-spacer></v-spacer>
+                    <v-toolbar-title>Chamado {{ code }}</v-toolbar-title>
 
-                <v-btn flat :to="{ name: 'maintenence.index' }">
+                </v-toolbar>
 
-                    <v-icon>list</v-icon>
+                <v-tabs-bar class="white">
 
-                    Lista
+                    <v-tabs-item ripple :href="'#service'">Solicitação</v-tabs-item>
 
-                </v-btn>
+                    <v-tabs-item ripple :href="'#requester'">Solicitante</v-tabs-item>
 
-            </v-toolbar>
+                    <v-tabs-item ripple :href="'#os'">Ordens de Serviço</v-tabs-item>
 
-                <v-layout row wrap>
+                    <v-tabs-slider></v-tabs-slider>
 
-                    <v-flex xs12 md6 >
+                </v-tabs-bar>
 
-                        <div class="pa-4">
+                <v-tabs-items>
 
-                            <v-toolbar class="white">
+                    <v-tabs-content id="service">
 
-                                <v-toolbar-title>Solicitante</v-toolbar-title>
+                        <v-card flat>
 
-                            </v-toolbar>
+                            <v-layout row wrap>
 
-                        </div>
+                                <v-flex xs12 md6>
 
-                    </v-flex>
+                                    <requester-list :requester="requester"></requester-list>
 
-                </v-layout>
+                                </v-flex>
+
+                                <v-flex xs12 md6>
+
+                                    <responsible-list :responsible="responsible"></responsible-list>
+
+                                </v-flex>
+
+                                <v-flex xs12 md12>
+
+                                    <service-list :service="service"></service-list>
+
+                                </v-flex>
+
+                            </v-layout>
+
+                        </v-card>
+
+                    </v-tabs-content>
+
+                    <v-tabs-content id="requester">
+
+                        <v-card flat>
+
+                            <v-card-text>
+
+                                <requester-list :requester="requester"></requester-list>
+
+                            </v-card-text>
+
+                        </v-card>
+
+                    </v-tabs-content>
+
+
+                    <v-tabs-content id="os">
+
+                        <v-card flat>
+
+                            <v-card-text>
+
+                                OS
+
+                            </v-card-text>
+
+                        </v-card>
+
+                    </v-tabs-content>
+
+                </v-tabs-items>
+
+            </v-tabs>
 
         </v-card>
 
@@ -46,10 +97,14 @@
 
 <script>
 
-    import resourceMixins from '../mixins/resourceMixins'
+    import resourceMixins from '../mixins/resourceMixins';
+    import Requester from './RequesterShowList.vue';
+    import Responsible from './ResponsibleShowList.vue';
+    import OS from './OSShowList.vue';
+    import Service from './ServiceShowList.vue';
 
     export default {
-        
+
         mixins: [resourceMixins],
 
         created() {
@@ -64,6 +119,30 @@
 
                 code: '',
 
+                requester: {
+
+                    name: '',
+                    email: '',
+                    local: '',
+                    phone: '',
+
+                },
+
+                responsible: {
+
+                    name: '',
+                    email: '',
+                    local: '',
+                    phone: ''
+                },
+
+                service: {
+
+                    description: '',
+                    created_at: ''
+
+                }
+
             }
 
         },
@@ -76,11 +155,62 @@
 
                     let service = response.data.solicitacao;
 
+                    this.setRequester(service);
+
+                    this.setResponsible(service);
+
+                    this.setService(service);
+
                     this.code = service.codigo;
+
+
 
                 });
 
+            },
+
+            setRequester(service) {
+
+                this.requester.name = service.solicitante.name;
+
+                this.requester.email = service.solicitante.main_email;
+
+                this.requester.local = 'Todo';
+
+                this.requester.phone = service.solicitante.phone;
+
+                this.code = service.codigo;
+
+            },
+
+            setResponsible(service) {
+
+                this.responsible.name = service.responsavel.name;
+
+                this.responsible.email = service.responsavel.main_email;
+
+                this.responsible.local = 'Todo';
+
+                this.responsible.phone = service.responsavel.phone;
+
+            },
+
+            setService(service) {
+
+                this.service.description = service.descricao;
+
+                this.service.created_at = service.created_at;
+
             }
+
+        },
+
+        components: {
+
+            'requester-list': Requester,
+            'responsible-list': Responsible,
+            'os-list': OS,
+            'service-list': Service
 
         }
 

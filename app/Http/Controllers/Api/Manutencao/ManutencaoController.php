@@ -39,7 +39,7 @@ class ManutencaoController extends Controller
     public function show($id)
     {
 
-        $solicitacao = $this->solicitacao->find($id);
+        $solicitacao = $this->solicitacao->with('responsavel', 'solicitante')->find($id);
 
         return compact('solicitacao');
 
