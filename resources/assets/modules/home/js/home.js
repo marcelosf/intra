@@ -8,6 +8,7 @@ import routerMap from '../../../common/routes/router.main';
 import Auth from '../../../common/services/auth';
 import {store} from '../../../store/store';
 import AsyncComputed from 'vue-async-computed';
+import Filter from '../../../common/filters';
 
 
 /**
@@ -40,6 +41,7 @@ new Vue({
 
     el: '#app',
     router: router,
+    filters: Filter,
     store,
     template: '<v-app><router-view></router-view></v-app>'
 

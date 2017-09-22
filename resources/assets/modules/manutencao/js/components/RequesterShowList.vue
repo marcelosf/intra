@@ -90,7 +90,7 @@
 
                             <v-list-tile-title>Ramal</v-list-tile-title>
 
-                            <v-list-tile-sub-title>{{ requester.phone }}</v-list-tile-sub-title>
+                            <v-list-tile-sub-title>{{ requester.phone | phone }}</v-list-tile-sub-title>
 
                         </v-list-tile-content>
 
@@ -110,9 +110,13 @@
 
 <script>
 
+    import Filter from '../../../../common/filters';
+
     export default {
 
         props: ['requester'],
+
+        filters: Filter
 
     }
 

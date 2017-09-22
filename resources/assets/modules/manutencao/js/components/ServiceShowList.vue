@@ -20,7 +20,7 @@
 
                             <v-list-tile-title>Data de criação</v-list-tile-title>
 
-                            <v-list-tile-sub-title>{{ service.created_at }}</v-list-tile-sub-title>
+                            <v-list-tile-sub-title>{{ service.created_at | date }}</v-list-tile-sub-title>
 
                         </v-list-tile-content>
 
@@ -46,7 +46,7 @@
 
                             <v-list-tile-title>Data de término</v-list-tile-title>
 
-                            <v-list-tile-sub-title>{{ service.created_at }}</v-list-tile-sub-title>
+                            <v-list-tile-sub-title>{{ service.created_at | date }}</v-list-tile-sub-title>
 
                         </v-list-tile-content>
 
@@ -58,27 +58,15 @@
 
             <v-flex xs12 md4>
 
-                <v-list>
-
-                    <v-list-tile>
-
-                        <v-list-tile-avatar>
-
-                            <v-icon x-large>date_range</v-icon>
-
-                        </v-list-tile-avatar>
-
-                        <v-list-tile-content>
-
-                            <v-list-tile-title>Status</v-list-tile-title>
-
-                            <v-list-tile-sub-title>{{ service.created_at }}</v-list-tile-sub-title>
-
-                        </v-list-tile-content>
-
-                    </v-list-tile>
-
-                </v-list>
+                <v-select
+                        v-bind:items="statusItems | serviceStatus"
+                        v-model="statusValue"
+                        label="Status"
+                        single-line
+                        prepend-icon="check_circle"
+                        bottom
+                >
+                </v-select>
 
             </v-flex>
 
@@ -102,10 +90,52 @@
 
 <script>
 
+    import Filters from '../../../../common/filters';
+    import StatusItems from '../mixins/status';
+
     export default {
 
-        props: ['service']
+        props: ['service'],
 
+        filters: Filters,
+
+        mounted() {
+
+            this.statusValue = this.service.status;
+
+        },
+
+        data() {
+
+            return {
+
+                statusItems: StatusItems.items,
+
+                status: null
+
+            }
+
+        },
+
+       computed: {
+
+            statusValue: {
+
+                get() {
+
+                    return this.service.status;
+
+                },
+
+                set(value) {
+
+                    this.status = value;
+
+                }
+
+            }
+
+       }
     }
 
 </script>

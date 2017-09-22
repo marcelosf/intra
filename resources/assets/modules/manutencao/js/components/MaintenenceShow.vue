@@ -16,8 +16,6 @@
 
                     <v-tabs-item ripple :href="'#service'">Solicitação</v-tabs-item>
 
-                    <v-tabs-item ripple :href="'#requester'">Solicitante</v-tabs-item>
-
                     <v-tabs-item ripple :href="'#os'">Ordens de Serviço</v-tabs-item>
 
                     <v-tabs-slider></v-tabs-slider>
@@ -55,21 +53,6 @@
                         </v-card>
 
                     </v-tabs-content>
-
-                    <v-tabs-content id="requester">
-
-                        <v-card flat>
-
-                            <v-card-text>
-
-                                <requester-list :requester="requester"></requester-list>
-
-                            </v-card-text>
-
-                        </v-card>
-
-                    </v-tabs-content>
-
 
                     <v-tabs-content id="os">
 
@@ -139,7 +122,8 @@
                 service: {
 
                     description: '',
-                    created_at: ''
+                    created_at: '',
+                    status: ''
 
                 }
 
@@ -162,8 +146,6 @@
                     this.setService(service);
 
                     this.code = service.codigo;
-
-
 
                 });
 
@@ -200,6 +182,8 @@
                 this.service.description = service.descricao;
 
                 this.service.created_at = service.created_at;
+
+                this.service.status = service.status;
 
             }
 
