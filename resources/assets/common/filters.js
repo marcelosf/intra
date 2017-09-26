@@ -43,6 +43,18 @@ export default {
 
         return value.replace(regex, "");
 
+    },
+
+    upFirst(value) {
+
+        let regex = /\b\w/g;
+
+        return value.replace(regex, (letter) => {
+
+            return letter.toUpperCase();
+
+        });
+
     }
 
 }

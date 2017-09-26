@@ -53,4 +53,15 @@ class ManutencaoController extends Controller
 
     }
 
+    public function getOss($id)
+    {
+
+        $s = $this->solicitacao->find($id);
+
+        $oss = $s->oss()->with('tecnica')->get();
+
+        return compact('oss');
+
+    }
+
 }

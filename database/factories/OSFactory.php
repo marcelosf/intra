@@ -2,15 +2,15 @@
 
 $factory->define(\Intranet\Model\Manutencao\OS::class, function (Faker\Generator $faker){
 
-    $solicitacaoMin = DB::table('manutencao_solicitacoes')->min('id');
-    $solicitacaoMax = DB::table('manutencao_solicitacoes')->max('id');
+    $solicitacaoMin = \Illuminate\Support\Facades\DB::table('manutencao_solicitacoes')->min('id');
+    $solicitacaoMax = \Illuminate\Support\Facades\DB::table('manutencao_solicitacoes')->max('id');
 
 
-    $tecnicaMin = DB::table('manutencao_tecnicas')->min('id');
-    $tecnicaMax = DB::table('manutencao_tecnicas')->max('id');
+    $tecnicaMin = \Illuminate\Support\Facades\DB::table('manutencao_tecnicas')->min('id');
+    $tecnicaMax = \Illuminate\Support\Facades\DB::table('manutencao_tecnicas')->max('id');
 
-    $userMin = DB::table('usuarios')->max('id');
-    $userMax = DB::table('usuarios')->max('id');
+    $userMin = \Illuminate\Support\Facades\DB::table('oauth_users')->max('id');
+    $userMax = \Illuminate\Support\Facades\DB::table('oauth_users')->max('id');
 
     $status = [
 

@@ -4,7 +4,7 @@ export default {
 
         return {
 
-            resource: this.$resource('manutencao{/query}{/id}')
+            resource: this.$resource('manutencao{/query}{/id}{/item}'),
 
         }
 
@@ -20,7 +20,7 @@ export default {
 
         getResource(id) {
 
-            return this.resource.get({query: 'show', id: id});
+            return this.resource.get({query: 'show', id: id, item: ''});
 
         },
 
@@ -39,6 +39,12 @@ export default {
         deleteResource() {
 
             return this.$http.delete('manutencao/delete/:id');
+
+        },
+
+        solicitacaoOss(solicitacao) {
+
+            return this.resource.query({query: 'solicitacao', id: solicitacao, item: 'oss'});
 
         }
 

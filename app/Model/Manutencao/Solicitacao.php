@@ -49,7 +49,7 @@ class Solicitacao extends Model
     public function oss()
     {
 
-        return $this->hasMany('App\Models\Manutencao\OS');
+        return $this->hasMany('Intranet\Model\Manutencao\OS');
 
     }
 

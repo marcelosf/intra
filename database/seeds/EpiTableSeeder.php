@@ -12,8 +12,6 @@ class EpiTableSeeder extends Seeder
     public function run()
     {
 
-
-
         factory(Intranet\Model\Manutencao\Epi::class, 5)->create();
 
     }

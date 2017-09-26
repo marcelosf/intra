@@ -60,7 +60,7 @@
 
                             <v-card-text>
 
-                                OS
+                                <os-list :service="service.id"></os-list>
 
                             </v-card-text>
 
@@ -83,7 +83,7 @@
     import resourceMixins from '../mixins/resourceMixins';
     import Requester from './RequesterShowList.vue';
     import Responsible from './ResponsibleShowList.vue';
-    import OS from './OSShowList.vue';
+    import OS from './OSShow.vue';
     import Service from './ServiceShowList.vue';
 
     export default {

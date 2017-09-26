@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
         $this->call(EpiTableSeeder::class);
         $this->call(SolicitacaoTableseeder::class);
         $this->call(TecnicaTableSeeder::class);
+        $this->call(OSTableSeeder::class);
 
     }
 }

@@ -68,6 +68,7 @@
     export default {
 
         components: {VIcon},
+
         mounted() {
 
             this.loadServices();
@@ -128,8 +129,6 @@
                 this.loading = true;
 
                 this.servicesResource().then((response) => {
-
-                    console.log(response.data.solicitacoes);
 
                     this.paginate(response.data.solicitacoes);
 
