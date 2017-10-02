@@ -188,7 +188,7 @@
 
                                    <v-card flat>
 
-                                        {{ epi }}
+                                        <epi-component :os="id"></epi-component>
 
                                    </v-card>
 
@@ -238,6 +238,7 @@
     import statusItems from '../mixins/status';
     import Filter from '../../../../common/filters';
     import Datepicker from '../../../../common/components/DatePicker.vue';
+    import Epi from './Epis.vue';
     import OSMixin from '../mixins/OS';
 
     export default {
@@ -376,7 +377,8 @@
 
         components: {
 
-            'datepicker': Datepicker
+            'datepicker': Datepicker,
+            'epi-component': Epi
 
         }
 

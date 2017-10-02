@@ -4,6 +4,8 @@ export default {
 
         return {
 
+            id: '',
+
             service: '',
 
             technitions: [],
@@ -25,6 +27,8 @@ export default {
     methods: {
 
         setOs(os) {
+
+            this.id = os.id;
 
             this.service = os.descricao;
 

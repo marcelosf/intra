@@ -18,9 +18,13 @@
 
         props: ['os'],
 
+        mixins: [resourceMixins],
+
         created() {
 
             this.getEpis();
+
+            this.getEpisItems();
 
         },
 
@@ -40,9 +44,25 @@
 
             getEpis() {
 
-                this.osEpis(this.os).then((response) => {
+                if(this.os) {
 
-                    this.epis = response.data;
+                    this.osEpis(this.os).then((response) => {
+
+                        console.log(response.data);
+
+                        this.epis = response.data;
+
+                    });
+
+                }
+
+            },
+
+            getEpisItems() {
+
+                this.resourceEpis().then((response) => {
+
+                    this.epiItems = response.data.epis;
 
                 });
 
