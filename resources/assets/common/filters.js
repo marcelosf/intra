@@ -31,9 +31,7 @@ export default {
 
     date(value) {
 
-        let regex = /(\d{4})-(\d{2})-(\d{2})\s(\d{2}:\d{2}:\d{2})/;
-
-        return value.replace(regex, '$3\/$2\/$1');
+        return moment(value, 'YYYY-MM-DD HH:mm:ss').format('DD/MM/YYYY');
 
     },
 

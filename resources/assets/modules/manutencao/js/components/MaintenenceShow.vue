@@ -10,6 +10,16 @@
 
                     <v-toolbar-title>Chamado {{ code }}</v-toolbar-title>
 
+                    <v-spacer></v-spacer>
+
+                    <v-btn flat :to="{name: 'maintenence.index'}">
+
+                        <v-icon>list</v-icon>
+
+                        Lista
+
+                    </v-btn>
+
                 </v-toolbar>
 
                 <v-tabs-bar class="white">

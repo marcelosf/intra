@@ -18,4 +18,12 @@ class OSController extends Controller
 
     }
 
+    public function index($service)
+    {
+
+        $oss = $this->os->with('solicitacao_id', '=', $service)->get();
+
+        return compact('oss');
+
+    }
 }

@@ -2,47 +2,231 @@
 
     <div>
 
-        <v-card>
+        <v-card flat>
 
-            <v-toolbar class="white">
+            <v-toolbar class="white" flat>
 
                 <v-toolbar-title>Ordens de Serviço</v-toolbar-title>
 
                 <v-spacer></v-spacer>
 
-                <v-text-field append-icon="search" label="Busca" single-line hide-details v-model="search"></v-text-field>
-
             </v-toolbar>
 
-            <v-data-table
-                    v-bind:headers="headers"
-                    v-bind:items="items"
-                    v-bind:search="search"
-                    :loading="loading"
-                    v-bind:pagination.sync="pagination"
-                    hide-actions
-            >
+            <v-layout row wrap>
 
-                <template slot="items" scope="props">
+                <v-flex xs12 md2>
 
-                    <td> <v-btn icon :to="{name: 'maintenence.show', params: {id: props.item.id}}"><v-icon>more_vert</v-icon></v-btn> {{ props.item.codigo }}</td>
-                    <td class="text-xs-left">{{ props.item.tecnica.nome | upFirst}}</td>
-                    <td class="text-xs-left">{{ props.item.created_at | date}}</td>
-                    <td class="text-xs-left">{{ props.item.updated_at | date }}</td>
-                    <td class="text-xs-left">{{ props.item.status | serviceStatus | upFirst}}</td>
+                    <v-layout row wrap>
 
-                </template>
+                            <v-data-table
+                                    v-model="selected"
+                                    v-bind:headers="headers"
+                                    v-bind:items="items"
+                                    :loading="loading"
+                                    v-bind:pagination.sync="pagination"
+                                    hide-actions
+                            >
 
-            </v-data-table>
+                                <template slot="items" scope="props">
+                                    <tr :active="props.selected" @click="props.selected = !props.selected; select(props);">
+                                        <td>{{ props.item.codigo }}</td>
+                                    </tr>
+                                </template>
 
-            <div class="text-xs-left pt-4 pb-4">
+                            </v-data-table>
 
-                <v-pagination :length="totalPages" v-model="pagination.page" circle></v-pagination>
+                            <div class="text-xs-left pt-4 pb-4" v-if="showPagination">
 
-            </div>
+                                <v-pagination :length="totalPages" v-model="pagination.page" circle></v-pagination>
+
+                            </div>
+
+                    </v-layout>
+
+                    <v-divider></v-divider>
+
+                    <v-layout>
+
+                        <v-btn primary block bottom>Nova OS</v-btn>
+
+                    </v-layout>
+
+
+                </v-flex>
+
+                <v-flex xs12 md10>
+
+                   <v-card flat class="ma-3">
+
+                       <v-layout row wrap>
+
+                           <v-flex xs12 md12>
+
+                               <span class="title">Serviço:</span>
+
+                               <blockquote>
+
+                                   <v-card flat>
+
+                                        {{ service }}
+
+                                   </v-card>
+
+                               </blockquote>
+
+                           </v-flex>
+
+                       </v-layout>
+
+                       <v-divider></v-divider>
+
+                        <v-layout row wrap>
+
+                           <v-flex xs12 md12>
+
+                               <span class="title">Técnicos:</span>
+
+                               <blockquote>
+
+                                   <v-card flat>
+
+                                       <v-select
+                                               v-bind:items="technitianItems"
+                                               v-model="technitians"
+                                               multiple
+                                               chips
+                                       ></v-select>
+
+                                   </v-card>
+
+                               </blockquote>
+
+                           </v-flex>
+
+                        </v-layout>
+
+                        <v-divider></v-divider>
+
+                        <v-layout row wrap>
+
+                            <v-flex xs12 md12>
+
+                                <span class="title">Data</span>
+
+                                <blockquote>
+
+                                    <v-card flat>
+
+                                        <v-layout wrap row>
+
+                                            <v-flex xs4 md4>
+
+                                                <v-text-field
+                                                    v-model="osCreatedAt"
+                                                    readonly
+                                                    label="Criado em"
+                                                    prepend-icon="event"
+                                                ></v-text-field>
+
+                                            </v-flex>
+
+                                            <v-flex xs4 md4>
+
+                                                <datepicker fieldTitle="Finalizado em"></datepicker>
+
+                                            </v-flex>
+
+                                            <v-flex xs4 md4>
+
+                                                <v-select
+                                                        v-bind:items="statusItems"
+                                                        v-model="status"
+                                                        label="Status"
+                                                        single-line
+                                                        bottom
+                                                ></v-select>
+
+                                            </v-flex>
+
+                                        </v-layout>
+
+                                    </v-card>
+
+                                </blockquote>
+
+                            </v-flex>
+
+                        </v-layout>
+
+                       <v-divider></v-divider>
+
+                       <v-layout row wrap>
+
+                           <v-flex xs12 xmd12>
+
+                               <span class="title">Observação</span>
+
+                               <blockquote>
+
+                                    {{ observation }}
+
+                               </blockquote>
+
+                           </v-flex>
+
+                       </v-layout>
+
+                       <v-divider></v-divider>
+
+                       <v-layout row wrap>
+
+                           <v-flex xs12 md12>
+
+                               <span class="title">Medidas</span>
+
+                               <blockquote>
+
+                                   <v-card flat>
+
+                                        {{ epi }}
+
+                                   </v-card>
+
+                               </blockquote>
+
+                           </v-flex>
+
+                       </v-layout>
+
+                       <v-divider></v-divider>
+
+                       <v-layout row wrap>
+
+                           <v-flex xs12 md12>
+
+                               <span class="title">Histórico</span>
+
+                               <blockquote>
+
+                                   <v-card flat>
+
+                                        {{ history }}
+
+                                   </v-card>
+
+                               </blockquote>
+
+                           </v-flex>
+
+                       </v-layout>
+
+                   </v-card>
+
+                </v-flex>
+
+            </v-layout>
 
         </v-card>
-
 
     </div>
 
@@ -51,13 +235,16 @@
 <script>
 
     import resourceMixins from '../mixins/resourceMixins';
+    import statusItems from '../mixins/status';
     import Filter from '../../../../common/filters';
+    import Datepicker from '../../../../common/components/DatePicker.vue';
+    import OSMixin from '../mixins/OS';
 
     export default {
 
         filters: Filter,
 
-        mixins: [resourceMixins],
+        mixins: [resourceMixins, OSMixin],
 
         created() {
 
@@ -71,17 +258,13 @@
 
                 oss: [],
 
+                os: null,
+
                 headers: [
 
                     {text: 'Código', align: 'left', value: 'codigo'},
-                    {text: 'Serviço', align: 'left', value: 'tecnica'},
-                    {text: 'Criação', align: 'left', value: 'created_at'},
-                    {text: 'Finalização', align: 'left', value: 'updated_at'},
-                    {text: 'Status', align: 'left', value: 'status'},
 
                 ],
-
-                search: '',
 
                 pagination: {},
 
@@ -89,7 +272,17 @@
 
                 items: [],
 
-                totalPages: 1
+                totalPages: 1,
+
+                status: '',
+
+                statusItems: statusItems.items,
+
+                technitians: [],
+
+                technitianItems: [],
+
+                selected: [],
 
             }
 
@@ -106,6 +299,18 @@
                     return Math.ceil((pag.totalItems / pag.rowsPerPage));
 
                 }
+
+            },
+
+            showPagination() {
+
+                return (this.totalPages > 1);
+
+            },
+
+            osCreatedAt() {
+
+                return moment(this.created_at, 'YYYY-MM-DD HH:mm:ss').format('DD/MM/YY');
 
             }
 
@@ -140,10 +345,29 @@
 
                 this.totalPages = this.pages;
 
+            },
+
+            select() {
+
+                let length = this.selected.length;
+
+                this.selected = this.selected.slice(length -1, length);
+
+                this.setOs(this.selected[0]);
+
             }
+
+
+        },
+
+        components: {
+
+            'datepicker': Datepicker
 
         }
 
+
     }
+
 
 </script>
