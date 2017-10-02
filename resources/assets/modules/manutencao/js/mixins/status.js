@@ -11,6 +11,7 @@ export default {
         {value: 'cancelado', text: 'Cancelado'},
         {value: 'aguardando_info', text: 'Aguardando Informação'},
         {value: 'aguardando_material', text: 'Aguardando Material'},
+        {value: 'resolvido', text: 'Resolvido'}
 
     ],
 

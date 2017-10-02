@@ -12,7 +12,16 @@ class OSTableSeeder extends Seeder
     public function run()
     {
 
-        factory(\Intranet\Model\Manutencao\OS::class, 50)->create();
+        $epi_min = \Illuminate\Support\Facades\DB::table('epi')->min('id');
+        $epi_max = \Illuminate\Support\Facades\DB::table('epi')->max('id');
+
+        factory(\Intranet\Model\Manutencao\OS::class, 50)->create()->each(function ($os) use ($epi_min, $epi_max) {
+
+            $epi = rand($epi_min, $epi_max);
+
+            $os->epis()->attach($epi);
+
+        });
 
     }
 }

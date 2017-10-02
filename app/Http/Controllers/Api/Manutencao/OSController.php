@@ -1,6 +1,6 @@
 <?php
 
-namespace Intranet\Http\Controllers\Manutencao;
+namespace Intranet\Http\Controllers\Api\Manutencao;
 
 use Illuminate\Http\Request;
 use Intranet\Http\Controllers\Controller;
@@ -26,4 +26,12 @@ class OSController extends Controller
         return compact('oss');
 
     }
+
+    public function getEpis($os)
+    {
+
+        return $this->os->find($os)->epis->all();
+
+    }
+
 }

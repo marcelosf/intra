@@ -331,6 +331,16 @@
 
             },
 
+            getEpis(osId) {
+
+                this.osEpis(osId).then((response) => {
+
+                    console.log(response.data);
+
+                })
+
+            },
+
             paginate(items) {
 
                 this.pagination.sortBy = 'codigo';
@@ -352,6 +362,10 @@
                 let length = this.selected.length;
 
                 this.selected = this.selected.slice(length -1, length);
+
+                this.status = this.selected[0].status;
+
+                this.getEpis(this.selected[0].id);
 
                 this.setOs(this.selected[0]);
 

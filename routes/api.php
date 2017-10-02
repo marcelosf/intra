@@ -66,6 +66,8 @@ Route::middleware(['cors'])->group(function (){
 
         Route::get('/solicitacao/{id}/oss', 'Api\Manutencao\ManutencaoController@getOss')->name('manutencao.getOss');
 
+        Route::get('/os/{id}/epis', 'Api\Manutencao\OSController@getEpis')->name('manutencao.os.epi');
+
     });
 
 });

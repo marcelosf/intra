@@ -46,6 +46,12 @@ export default {
 
             return this.resource.query({query: 'solicitacao', id: solicitacao, item: 'oss'});
 
+        },
+
+        osEpis(os) {
+
+            return this.resource.query({query: 'os', id: os, item: 'epis' });
+
         }
 
     }
