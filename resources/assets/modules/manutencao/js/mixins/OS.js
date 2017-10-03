@@ -42,8 +42,6 @@ export default {
 
             this.epi = [{text:'óculos', value:'oculos'}];
 
-            this.history = '';
-
         }
 
     }

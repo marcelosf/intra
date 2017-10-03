@@ -200,25 +200,6 @@
 
                        <v-divider></v-divider>
 
-                       <v-layout row wrap>
-
-                           <v-flex xs12 md12>
-
-                               <span class="title">Histórico</span>
-
-                               <blockquote>
-
-                                   <v-card flat>
-
-
-                                   </v-card>
-
-                               </blockquote>
-
-                           </v-flex>
-
-                       </v-layout>
-
                    </v-card>
 
                 </v-flex>
