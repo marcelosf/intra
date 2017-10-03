@@ -21,7 +21,7 @@ class EpiController extends Controller
     public function index()
     {
 
-        $epis = $this->epi->all()->pluck('equipamento');
+        $epis = $this->epi->all();
 
         return compact('epis');
 

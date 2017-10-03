@@ -4,6 +4,7 @@
             label=""
             v-bind:items="epiItems"
             v-model="epis"
+            :async-loading="loading"
             multiple
             chips
     ></v-select>
@@ -22,8 +23,6 @@
 
         created() {
 
-            this.getEpis();
-
             this.getEpisItems();
 
         },
@@ -32,37 +31,66 @@
 
             return {
 
+                epiList: {},
+
                 epiItems: [],
 
-                epis: []
+                epis: [],
+
+                loading: false
 
             }
 
         },
 
-        methods: {
+        watch: {
 
-            getEpis() {
+            os() {
 
-                if(this.os) {
+                if (this.os) {
 
                     this.osEpis(this.os).then((response) => {
 
-                        console.log(response.data);
+                        let items = [], i, data = response.data;
 
-                        this.epis = response.data;
+                        for (i in data) {
+
+                            items.push(data[i].id);
+
+                        }
+
+                        this.epis = items;
 
                     });
 
                 }
 
-            },
+            }
+
+        },
+
+
+        methods: {
 
             getEpisItems() {
 
                 this.resourceEpis().then((response) => {
 
-                    this.epiItems = response.data.epis;
+                    let items = [], i, data = response.data.epis;
+
+                    for (i in data) {
+
+                        let obj = {};
+
+                        obj.text = data[i].equipamento;
+
+                        obj.value = data[i].id;
+
+                        items.push(obj);
+
+                    }
+
+                    this.epiItems = items;
 
                 });
 
