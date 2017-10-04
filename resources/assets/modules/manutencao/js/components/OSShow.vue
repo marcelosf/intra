@@ -14,7 +14,7 @@
 
                 <v-layout row wrap>
 
-                    <v-flex md5 xs5>
+                    <v-flex md5 xs5 >
 
                         <v-select
                                 v-bind:items="items"
@@ -26,7 +26,7 @@
 
                 </v-layout>
 
-                <v-btn primary class="white--text">Nova OS</v-btn>
+                <v-btn primary class="white--text" :to="{name: 'maintenence.os.new'}">Nova OS</v-btn>
 
             </v-toolbar>
 

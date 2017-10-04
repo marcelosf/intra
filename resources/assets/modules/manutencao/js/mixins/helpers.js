@@ -1,0 +1,13 @@
+export default {
+
+    methods: {
+
+        toSelect() {
+
+
+
+        }
+
+    }
+
+}

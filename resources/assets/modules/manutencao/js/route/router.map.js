@@ -2,6 +2,7 @@ import MaintenenceIndex from '../components/MaintenenceIndex.vue';
 import MaintenenceCreate from '../components/MaintenenceCreate.vue';
 import MaintenenceEdit from '../components/MaintenenceEdit.vue';
 import MaintenenceShow from '../components/MaintenenceShow.vue';
+import OSCreate from '../components/OSCreate.vue';
 
 export const MaintenenceRoutes = [
 
@@ -39,6 +40,15 @@ export const MaintenenceRoutes = [
         meta: {requireAuth: false, title: 'Manutenção'},
         component: MaintenenceShow
 
-    }
+    },
+
+    {
+
+        path: 'servico/manutencao/os/novo/',
+        name: 'maintenence.os.new',
+        meta: {requireAuth: false, title: 'Manutenção'},
+        component: OSCreate
+
+    },
 
 ];
