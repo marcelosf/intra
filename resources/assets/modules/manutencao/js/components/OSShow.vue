@@ -6,55 +6,33 @@
 
             <v-toolbar class="white" flat>
 
-                <v-toolbar-title>Ordens de Serviço</v-toolbar-title>
+                <v-toolbar-title>
 
-                <v-spacer></v-spacer>
+                    <span>Ordem de Serviço</span>
+
+                </v-toolbar-title>
+
+                <v-layout row wrap>
+
+                    <v-flex md5 xs5>
+
+                        <v-select
+                                v-bind:items="items"
+                                v-model="selected"
+                                class="ml-2"
+                        ></v-select>
+
+                    </v-flex>
+
+                </v-layout>
+
+                <v-btn primary class="white--text">Nova OS</v-btn>
 
             </v-toolbar>
 
             <v-layout row wrap>
 
-                <v-flex xs12 md2>
-
-                    <v-layout row wrap>
-
-                            <v-data-table
-                                    v-model="selected"
-                                    v-bind:headers="headers"
-                                    v-bind:items="items"
-                                    :loading="loading"
-                                    v-bind:pagination.sync="pagination"
-                                    hide-actions
-                            >
-
-                                <template slot="items" scope="props">
-                                    <tr :active="props.selected" @click="props.selected = !props.selected; select(props);">
-                                        <td>{{ props.item.codigo }}</td>
-                                    </tr>
-                                </template>
-
-                            </v-data-table>
-
-                            <div class="text-xs-left pt-4 pb-4" v-if="showPagination">
-
-                                <v-pagination :length="totalPages" v-model="pagination.page" circle></v-pagination>
-
-                            </div>
-
-                    </v-layout>
-
-                    <v-divider></v-divider>
-
-                    <v-layout>
-
-                        <v-btn primary block bottom>Nova OS</v-btn>
-
-                    </v-layout>
-
-
-                </v-flex>
-
-                <v-flex xs12 md10>
+                <v-flex xs12 md12>
 
                    <v-card flat class="ma-3">
 
@@ -80,6 +58,24 @@
 
                        <v-divider></v-divider>
 
+                       <v-layout row wrap>
+
+                           <v-flex xs12 xmd12>
+
+                               <span class="title">Observação</span>
+
+                               <blockquote>
+
+                                   {{ observation }}
+
+                               </blockquote>
+
+                           </v-flex>
+
+                       </v-layout>
+
+                       <v-divider></v-divider>
+
                         <v-layout row wrap>
 
                            <v-flex xs12 md12>
@@ -90,12 +86,7 @@
 
                                    <v-card flat>
 
-                                       <v-select
-                                               v-bind:items="technitianItems"
-                                               v-model="technitians"
-                                               multiple
-                                               chips
-                                       ></v-select>
+                                       <technitians-component :os="id"></technitians-component>
 
                                    </v-card>
 
@@ -109,7 +100,7 @@
 
                         <v-layout row wrap>
 
-                            <v-flex xs12 md12>
+                            <v-flex xs8 md8>
 
                                 <span class="title">Data</span>
 
@@ -119,7 +110,7 @@
 
                                         <v-layout wrap row>
 
-                                            <v-flex xs4 md4>
+                                            <v-flex xs6 md6>
 
                                                 <v-text-field
                                                     v-model="osCreatedAt"
@@ -130,21 +121,9 @@
 
                                             </v-flex>
 
-                                            <v-flex xs4 md4>
+                                            <v-flex xs6 md6>
 
                                                 <datepicker fieldTitle="Finalizado em"></datepicker>
-
-                                            </v-flex>
-
-                                            <v-flex xs4 md4>
-
-                                                <v-select
-                                                        v-bind:items="statusItems"
-                                                        v-model="status"
-                                                        label="Status"
-                                                        single-line
-                                                        bottom
-                                                ></v-select>
 
                                             </v-flex>
 
@@ -156,25 +135,25 @@
 
                             </v-flex>
 
+                            <v-flex xs4 xmd4>
+
+                                <span class="title">Status</span>
+
+                                <blockquote>
+
+                                    <v-select
+                                            v-bind:items="statusItems"
+                                            v-model="status"
+                                            label="Status"
+                                            single-line
+                                            bottom
+                                    ></v-select>
+
+                                </blockquote>
+
+                            </v-flex>
+
                         </v-layout>
-
-                       <v-divider></v-divider>
-
-                       <v-layout row wrap>
-
-                           <v-flex xs12 xmd12>
-
-                               <span class="title">Observação</span>
-
-                               <blockquote>
-
-                                    {{ observation }}
-
-                               </blockquote>
-
-                           </v-flex>
-
-                       </v-layout>
 
                        <v-divider></v-divider>
 
@@ -198,8 +177,6 @@
 
                        </v-layout>
 
-                       <v-divider></v-divider>
-
                    </v-card>
 
                 </v-flex>
@@ -220,6 +197,7 @@
     import Datepicker from '../../../../common/components/DatePicker.vue';
     import Epi from './Epis.vue';
     import OSMixin from '../mixins/OS';
+    import Technitioans from './Technitians.vue';
 
     export default {
 
@@ -227,7 +205,7 @@
 
         mixins: [resourceMixins, OSMixin],
 
-        created() {
+        mounted() {
 
             this.getOss();
 
@@ -239,31 +217,13 @@
 
                 oss: [],
 
-                os: null,
-
-                headers: [
-
-                    {text: 'Código', align: 'left', value: 'codigo'},
-
-                ],
-
-                pagination: {},
-
-                loading: true,
-
                 items: [],
-
-                totalPages: 1,
 
                 status: '',
 
                 statusItems: statusItems.items,
 
-                technitians: [],
-
-                technitianItems: [],
-
-                selected: [],
+                selected: null,
 
             }
 
@@ -271,27 +231,19 @@
 
         computed: {
 
-            pages() {
-
-                let pag = this.pagination;
-
-                if (pag.rowsPerPage > 0) {
-
-                    return Math.ceil((pag.totalItems / pag.rowsPerPage));
-
-                }
-
-            },
-
-            showPagination() {
-
-                return (this.totalPages > 1);
-
-            },
-
             osCreatedAt() {
 
                 return moment(this.created_at, 'YYYY-MM-DD HH:mm:ss').format('DD/MM/YY');
+
+            }
+
+        },
+
+        watch: {
+
+            selected() {
+
+                this.loadFormData();
 
             }
 
@@ -302,55 +254,53 @@
             getOss()
             {
 
-                this.loading = true;
-
                 this.solicitacaoOss(this.$route.params.id).then((response) => {
 
-                    this.paginate(response.data.oss);
+                    this.oss = response.data.oss;
+
+                    console.log(this.oss);
+
+                    let i, data = response.data.oss, items = [];
+
+                    for (i in data) {
+
+                        let obj = {
+
+                            text: data[i].codigo + ' ' + data[i].tecnica.nome + '/' + data[i].status,
+
+                            value: data[i]
+
+                        };
+
+                        items.push(obj);
+
+                    }
+
+                    this.items = items;
+
+                    this.selected = items[items.length -1].value;
 
                 });
 
             },
 
+            loadFormData() {
 
-            paginate(items) {
+                this.setOs(this.selected);
 
-                this.pagination.sortBy = 'codigo';
-
-                this.pagination.rowsPerPage = 10;
-
-                this.pagination.totalItems = items.length;
-
-                this.loading = false;
-
-                this.items = items;
-
-                this.totalPages = this.pages;
-
-            },
-
-            select() {
-
-                let length = this.selected.length;
-
-                this.selected = this.selected.slice(length -1, length);
-
-                this.status = this.selected[0].status;
-
-                this.setOs(this.selected[0]);
+                this.status = this.selected.status;
 
             }
-
 
         },
 
         components: {
 
             'datepicker': Datepicker,
-            'epi-component': Epi
+            'epi-component': Epi,
+            'technitians-component': Technitioans
 
         }
-
 
     }
 

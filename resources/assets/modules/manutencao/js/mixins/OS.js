@@ -40,8 +40,6 @@ export default {
 
             this.observation = os.relatorio;
 
-            this.epi = [{text:'óculos', value:'oculos'}];
-
         }
 
     }

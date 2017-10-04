@@ -80,7 +80,7 @@ class OS extends Model
     public function tecnicos()
     {
 
-        return $this->belongsToMany('Schneider\OAuthUsp\app\Model\OauthUser', 'manutencao_os_tecnico', 'tecnico_id', 'os_id');
+        return $this->belongsToMany('Schneider\OAuthUsp\app\Http\Model\OauthUsers', 'manutencao_os_tecnico', 'tecnico_id', 'os_id');
 
     }
 

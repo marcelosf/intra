@@ -68,10 +68,21 @@ Route::middleware(['cors'])->group(function (){
 
         Route::get('/os/{id}/epis', 'Api\Manutencao\OSController@getEpis')->name('manutencao.os.epi');
 
+        Route::get('/os/{id}/tecnicos', 'Api\Manutencao\OSController@getTecnicos')->name('manutencao.os.tecnicos');
+
         Route::get('/epi', 'Api\Manutencao\EpiController@index')->name('manutencao.epi');
 
     });
 
+    /**
+     * Users
+     *
+     */
+    Route::prefix('usuario')->group(function() {
+
+        Route::get('/', 'Api\User\UserController@index')->name('usuario.index');
+
+    });
 });
 
 

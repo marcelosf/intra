@@ -58,6 +58,12 @@ export default {
 
             return this.resource.query({query: 'epi'});
 
+        },
+
+        manutencaoOsTecnicos(os) {
+
+            return this.resource.query({query: 'os', id: os, item: 'tecnicos'});
+
         }
 
     }
