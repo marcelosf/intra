@@ -19,6 +19,7 @@ class OS extends Model
         'status',
         'gestor_id',
         'relatorio',
+        'observacao',
         'data_inicio',
         'data_termino',
         'tecnica_id',

@@ -35,6 +35,7 @@ $factory->define(\Intranet\Model\Manutencao\OS::class, function (Faker\Generator
         'created_at'        => $faker->dateTimeThisMonth,
         'updated_at'        => $faker->dateTimeThisMonth,
         'gestor_id'         => $faker->numberBetween($userMin, $userMax),
+        'observacao'        => $faker->paragraph(5, true)
 
     ];
 
