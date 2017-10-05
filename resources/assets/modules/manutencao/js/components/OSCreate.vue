@@ -82,7 +82,7 @@
 
     import UserResources from '../../../user/js/mixins/resourceMixins';
     import MaintenenceResource from '../mixins/resourceMixins';
-    import {OS} from '../form/OS';
+    import {OS} from '../forms/OS';
 
     export default {
 
