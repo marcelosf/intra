@@ -2,49 +2,77 @@
 
     <div>
 
-        <v-layout row wrap>
+        <v-dialog v-model="dialog" persistent width="50%">
 
-            <v-flex xs12 md12>
+            <v-btn primary class="white--text" slot="activator">Nova OS</v-btn>
 
-                <v-card>
+            <v-layout row wrap>
 
-                    <v-toolbar class="white">
+                <v-flex xs12 md12>
 
-                        <v-toolbar-title>Nova Ordem de Serviço</v-toolbar-title>
+                    <v-card flat>
 
-                    </v-toolbar>
+                        <v-card-title class="headline">Nova Ordem de Serviço</v-card-title>
 
-                    <v-container fluid>
+                        <v-card-text>
 
-                        <v-select
-                                label="Técnicos"
-                                v-bind:items="technitianItems"
-                                v-model="technitians"
-                                multiple
-                                chips
-                        ></v-select>
+                            <v-container fluid>
 
-                        <v-select label="Área Técnica"></v-select>
+                                <v-form v-model="valid" ref="form">
 
-                        <v-select
-                                label="Proteção Individual (EPI) / Proteção Coletiva"
-                                v-bind:items="epiItems"
-                                v-model="epis"
-                                multiple
-                                chips
-                        ></v-select>
+                                    <v-select
+                                            label="Técnicos"
+                                            v-bind:items="technitianItems"
+                                            v-model="os.technitians"
+                                            multiple
+                                            required
+                                            chips
+                                            :rules="[rules.selectIsEmpty]"
+                                    ></v-select>
 
-                        <v-text-field multi-line label="Observação"></v-text-field>
+                                    <v-select
+                                            label="Área Técnica"
+                                            v-bind:items="techItems"
+                                            v-model="os.tech"
+                                            required
+                                            :rules="[rules.textIsEmpty]"
+                                    ></v-select>
 
-                        <v-btn primary class="text--white">Salvar</v-btn>
+                                    <v-select
+                                            label="Proteção Individual (EPI) / Proteção Coletiva"
+                                            v-bind:items="epiItems"
+                                            v-model="os.epis"
+                                            multiple
+                                            chips
+                                    ></v-select>
 
-                    </v-container>
+                                    <v-text-field multi-line label="Observação" v-model="os.observation"></v-text-field>
 
-                </v-card>
+                                </v-form>
 
-            </v-flex>
+                            </v-container>
 
-        </v-layout>
+                        </v-card-text>
+
+                        <v-card-actions>
+
+                            <v-spacer></v-spacer>
+
+                            <v-btn slot="actions" class="blue--text darken-1" flat @click.native="dialog = false">Cancelar</v-btn>
+
+                            <v-btn slot="actions" class="blue--text darken-1" flat @click.native="send(); dialog = false;">Salvar</v-btn>
+
+                        </v-card-actions>
+
+                    </v-card>
+
+                </v-flex>
+
+            </v-layout>
+
+
+        </v-dialog>
+
 
     </div>
 
@@ -54,10 +82,13 @@
 
     import UserResources from '../../../user/js/mixins/resourceMixins';
     import MaintenenceResource from '../mixins/resourceMixins';
+    import {OS} from '../form/OS';
 
     export default {
 
         mixins: [UserResources, MaintenenceResource],
+
+        props: ['service'],
 
 
         created() {
@@ -66,19 +97,61 @@
 
             this.getEpis();
 
+            this.getTechArea();
+
         },
 
         data() {
 
             return {
 
-                technitianItems: [],
+                dialog: false,
 
-                technitians: [],
+                os: {
+
+                    technitians: null,
+
+                    epis: null,
+
+                    tech: null,
+
+                    observation: null
+
+                },
+
+                technitianItems: [],
 
                 epiItems: [],
 
-                epis: []
+                techItems: [],
+
+                valid: false,
+
+                rules: {
+
+                    selectIsEmpty(value) {
+
+                        return (value != '') ? true : 'Campo Obrigatório.';
+
+                    },
+
+                    textIsEmpty(value) {
+
+                        return (!!value) || 'Campo Obrigatório.';
+
+                    }
+
+                }
+
+            }
+
+        },
+
+        watch: {
+
+            onSend() {
+
+                this.send();
 
             }
 
@@ -135,6 +208,52 @@
                     this.epiItems = items;
 
                 });
+
+            },
+
+            getTechArea() {
+
+                this.maintenenceTechArea().then((response) => {
+
+                    let i, data = response.data, items = [];
+
+                    for (i in data) {
+
+                        let obj = {
+
+                            text: data[i].nome,
+
+                            value: data[i].id
+
+                        }
+
+                        items.push(obj);
+
+                    }
+
+                    this.techItems = items;
+
+                });
+
+            },
+
+            send() {
+
+                this.$refs.form.validate();
+
+                if (this.valid) {
+
+
+                    console.log('enviado');
+//                    let os = new OS(service, this.os.status, 3, this.os.);
+
+//                    this.maintenenceResource().save({query: 'os'}, {item: this.os}).then((response) => {
+//
+//
+//
+//                    });
+
+                }
 
             }
 

@@ -2,6 +2,7 @@
 
 namespace Intranet\Http\Controllers\Api\Manutencao;
 
+use Illuminate\Http\Request;
 use Intranet\Http\Controllers\Controller;
 use Intranet\Model\Manutencao\OS;
 
@@ -23,6 +24,13 @@ class OSController extends Controller
         $oss = $this->os->with('solicitacao_id', '=', $service)->get();
 
         return compact('oss');
+
+    }
+
+    public function store(Request $request)
+    {
+
+
 
     }
 

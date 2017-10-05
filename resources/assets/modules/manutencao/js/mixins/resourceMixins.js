@@ -24,9 +24,9 @@ export default {
 
         },
 
-        saveResource(item) {
+        maintenenceResource() {
 
-            return this.$http.save(item);
+            return this.resource;
 
         },
 
@@ -63,6 +63,12 @@ export default {
         manutencaoOsTecnicos(os) {
 
             return this.resource.query({query: 'os', id: os, item: 'tecnicos'});
+
+        },
+
+        maintenenceTechArea() {
+
+            return this.resource.query({query: 'tecnica'});
 
         }
 

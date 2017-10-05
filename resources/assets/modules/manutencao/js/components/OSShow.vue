@@ -24,9 +24,11 @@
 
                     </v-flex>
 
-                </v-layout>
+                    <v-spacer></v-spacer>
 
-                <v-btn primary class="white--text" :to="{name: 'maintenence.os.new'}">Nova OS</v-btn>
+                    <os-dialog-create :service="this.$route.params.id"></os-dialog-create>
+
+                </v-layout>
 
             </v-toolbar>
 
@@ -198,6 +200,7 @@
     import Epi from './Epis.vue';
     import OSMixin from '../mixins/OS';
     import Technitioans from './Technitians.vue';
+    import OSCreate from '../components/OSCreate.vue';
 
     export default {
 
@@ -223,7 +226,7 @@
 
                 statusItems: statusItems.items,
 
-                selected: null,
+                selected: null
 
             }
 
@@ -298,7 +301,8 @@
 
             'datepicker': Datepicker,
             'epi-component': Epi,
-            'technitians-component': Technitioans
+            'technitians-component': Technitioans,
+            'os-dialog-create': OSCreate
 
         }
 
