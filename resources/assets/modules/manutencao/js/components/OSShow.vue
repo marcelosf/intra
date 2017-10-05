@@ -261,8 +261,6 @@
 
                     this.oss = response.data.oss;
 
-                    console.log(this.oss);
-
                     let i, data = response.data.oss, items = [];
 
                     for (i in data) {
@@ -290,6 +288,8 @@
             loadFormData() {
 
                 this.setOs(this.selected);
+
+                console.log(this.selected);
 
                 this.status = this.selected.status;
 

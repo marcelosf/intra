@@ -18,7 +18,7 @@ export default {
 
             epi: [],
 
-            history: ''
+            history: '',
 
         }
 
@@ -38,7 +38,7 @@ export default {
 
             this.finishedAt = os.data_termino;
 
-            this.observation = os.relatorio;
+            this.observation = os.observacao;
 
         }
 
