@@ -1,13 +1,17 @@
 export class OS {
 
-    constructor(service, manager, technitians, tech, epis, obs)
+    constructor(service, description, manager, technitians, tech, epis, obs)
     {
+
+        this.codigo = null;
+
+        this.status = null;
 
         this.solicitacao_id = service;
 
         this.descricao = description;
 
-        this.gestor = manager;
+        this.gestor_id = manager;
 
         this.tecnica_id = tech;
 
@@ -17,6 +21,7 @@ export class OS {
 
         this.observacao = obs;
 
+        this.relatorio = null;
 
     }
 

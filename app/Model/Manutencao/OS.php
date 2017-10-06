@@ -19,8 +19,8 @@ class OS extends Model
         'status',
         'gestor_id',
         'relatorio',
+        'descricao',
         'observacao',
-        'data_inicio',
         'data_termino',
         'tecnica_id',
     ];
@@ -81,7 +81,7 @@ class OS extends Model
     public function tecnicos()
     {
 
-        return $this->belongsToMany('Schneider\OAuthUsp\app\Http\Model\OauthUsers', 'manutencao_os_tecnico', 'tecnico_id', 'os_id');
+        return $this->belongsToMany('Schneider\OAuthUsp\app\Http\Model\OauthUsers', 'manutencao_os_tecnico', 'os_id', 'tecnico_id');
 
     }
 
@@ -135,6 +135,13 @@ class OS extends Model
         }
 
         $this->attributes['codigo'] = $codigo . '/' . date('y');
+
+    }
+
+    public function setStatusAttribute()
+    {
+
+        $this->attributes['status'] = 'autorizacao';
 
     }
 

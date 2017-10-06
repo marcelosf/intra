@@ -30,7 +30,11 @@ class OSController extends Controller
     public function store(Request $request)
     {
 
+        $os = $this->os->create($request->all());
 
+        $this->attachEpis($request, $os);
+
+        $this->attachTecnicos($request, $os);
 
     }
 
@@ -47,6 +51,33 @@ class OSController extends Controller
         $tecnicos = $this->os->find($os)->tecnicos;
 
         return compact('tecnicos');
+
+    }
+
+    protected function attachEpis(Request $request, $os)
+    {
+
+        $epis = $request->epis;
+
+        foreach ($epis as $epi) {
+
+            $os->epis()->attach($epi);
+
+        }
+
+    }
+
+
+    protected function attachTecnicos(Request $request, $os)
+    {
+
+        $tecnicos = $request->tecnicos;
+
+        foreach($tecnicos as $tecnico) {
+
+            $os->tecnicos()->attach($tecnico);
+
+        }
 
     }
 

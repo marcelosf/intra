@@ -20,6 +20,11 @@
 
                                 <v-form v-model="valid" ref="form">
 
+                                    <v-text-field
+                                            label="Descrição"
+                                            v-model="os.description"
+                                    ></v-text-field>
+
                                     <v-select
                                             label="Técnicos"
                                             v-bind:items="technitianItems"
@@ -109,6 +114,8 @@
 
                 os: {
 
+                    description: null,
+
                     technitians: null,
 
                     epis: null,
@@ -142,16 +149,6 @@
                     }
 
                 }
-
-            }
-
-        },
-
-        watch: {
-
-            onSend() {
-
-                this.send();
 
             }
 
@@ -243,15 +240,13 @@
 
                 if (this.valid) {
 
+                    let os = new OS(this.$route.params.id, this.os.description, 3, this.os.technitians, this.os.tech, this.os.epis, this.os.observation);
 
-                    console.log('enviado');
-//                    let os = new OS(service, this.os.status, 3, this.os.);
+                    this.maintenenceResource().save({query: 'os'}, os).then((response) => {
 
-//                    this.maintenenceResource().save({query: 'os'}, {item: this.os}).then((response) => {
-//
-//
-//
-//                    });
+                        this.$emit('reload-data');
+
+                    });
 
                 }
 

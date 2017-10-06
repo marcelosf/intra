@@ -26,7 +26,7 @@
 
                     <v-spacer></v-spacer>
 
-                    <os-dialog-create :service="this.$route.params.id"></os-dialog-create>
+                    <os-dialog-create :service="this.$route.params.id" @reload-data="getOss"></os-dialog-create>
 
                 </v-layout>
 
@@ -280,6 +280,8 @@
                     this.items = items;
 
                     this.selected = items[items.length -1].value;
+
+                    console.log('data-reload');
 
                 });
 
