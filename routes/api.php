@@ -68,6 +68,8 @@ Route::middleware(['cors'])->group(function (){
 
         Route::get('/os/{id}/epis', 'Api\Manutencao\OSController@getEpis')->name('manutencao.os.epi');
 
+        Route::get('/os/{id}', 'Api\Manutencao\OSController@show')->name('manutencao.os.show');
+
         Route::get('/os/{id}/tecnicos', 'Api\Manutencao\OSController@getTecnicos')->name('manutencao.os.tecnicos');
 
         Route::get('/epi', 'Api\Manutencao\EpiController@index')->name('manutencao.epi');
@@ -78,7 +80,7 @@ Route::middleware(['cors'])->group(function (){
 
         Route::post('/os', 'Api\Manutencao\OSController@store')->name('mnutencao.os.store');
 
-        Route::put('/os/update', 'Api\Manutencao\OSontroller@update')->name('manutencao.os.update');
+        Route::put('/os/update/{id}', 'Api\Manutencao\OSController@update')->name('manutencao.os.update');
 
     });
 

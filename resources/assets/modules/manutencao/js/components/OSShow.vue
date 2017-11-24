@@ -202,6 +202,7 @@
     import Technitioans         from './Technitians.vue';
     import OSCreate             from '../components/OSCreate.vue';
     import {OS}                 from '../forms/OS';
+    import OSResource           from '../resources/OSResource.mixin';
 
     export default {
 
@@ -286,8 +287,6 @@
 
                     this.selected = items[items.length -1].value;
 
-                    console.log(this.selected);
-
                 });
 
             },
@@ -300,17 +299,9 @@
 
             },
 
-            getDate(value) {
-
-                console.log(value);
-
-            },
-
             dateChanged(value) {
 
                 this.endDate = value;
-
-                console.log(value);
 
             },
 

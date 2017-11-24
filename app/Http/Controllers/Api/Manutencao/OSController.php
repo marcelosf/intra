@@ -38,6 +38,13 @@ class OSController extends Controller
 
     }
 
+    public function show($id)
+    {
+
+        return $this->os->find($id);
+
+    }
+
     public function update(Request $request, $os)
     {
 

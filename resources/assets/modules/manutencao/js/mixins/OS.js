@@ -20,6 +20,8 @@ export default {
 
             history: '',
 
+            originalData: {}
+
         }
 
     },
@@ -39,6 +41,8 @@ export default {
             this.finishedAt = os.data_termino;
 
             this.observation = os.observacao;
+
+            this.originalData = os;
 
         }
 
