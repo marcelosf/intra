@@ -5,6 +5,7 @@
             v-model="technitians"
             multiple
             chips
+            @input="changed"
     ></v-select>
 
 </template>
@@ -57,6 +58,8 @@
 
                         this.technitians = items;
 
+                        this.$emit('loaded', this.technitians);
+
                     });
 
                 }
@@ -84,6 +87,12 @@
                     this.technitianItems = items;
 
                 });
+
+            },
+
+            changed() {
+
+
 
             }
 

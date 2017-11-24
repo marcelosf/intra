@@ -15,6 +15,7 @@ class Solicitacao extends Model
      */
     protected $fillable = [
         'codigo',
+        'descricao',
         'solicitante_id',
         'responsavel_id',
         'local_id',

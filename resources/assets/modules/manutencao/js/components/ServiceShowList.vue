@@ -92,12 +92,15 @@
 
     import Filters from '../../../../common/filters';
     import StatusItems from '../mixins/status';
+    import MaintenenceResource from '../mixins/resourceMixins';
 
     export default {
 
         props: ['service'],
 
         filters: Filters,
+
+        mixins: [MaintenenceResource],
 
         mounted() {
 
@@ -131,11 +134,37 @@
 
                     this.status = value;
 
+                    this.changeStatus(value);
+
                 }
 
             }
 
-       }
+       },
+
+        methods: {
+
+            changeStatus(value) {
+
+                if (value !== this.service.status) {
+
+                    let serviceUpdated = this.service.service;
+
+                    serviceUpdated.status = value;
+
+                    console.log(serviceUpdated);
+
+                    this.updateOrder(this.$route.params.id, serviceUpdated).then((response) => {
+
+                        console.log(response);
+
+                    });
+
+                }
+
+            }
+
+        }
     }
 
 </script>

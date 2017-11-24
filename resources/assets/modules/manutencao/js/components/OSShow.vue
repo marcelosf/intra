@@ -88,7 +88,7 @@
 
                                    <v-card flat>
 
-                                       <technitians-component :os="id"></technitians-component>
+                                       <technitians-component :os="id" @loaded="setTech"></technitians-component>
 
                                    </v-card>
 
@@ -125,7 +125,7 @@
 
                                             <v-flex xs6 md6>
 
-                                                <datepicker fieldTitle="Finalizado em"></datepicker>
+                                                <datepicker :os="this.selected" fieldTitle="Finalizado em" @loaded="dateChanged"></datepicker>
 
                                             </v-flex>
 
@@ -193,14 +193,15 @@
 
 <script>
 
-    import resourceMixins from '../mixins/resourceMixins';
-    import statusItems from '../mixins/status';
-    import Filter from '../../../../common/filters';
-    import Datepicker from '../../../../common/components/DatePicker.vue';
-    import Epi from './Epis.vue';
-    import OSMixin from '../mixins/OS';
-    import Technitioans from './Technitians.vue';
-    import OSCreate from '../components/OSCreate.vue';
+    import resourceMixins       from '../mixins/resourceMixins';
+    import statusItems          from '../mixins/status';
+    import Filter               from '../../../../common/filters';
+    import Datepicker           from '../../../../common/components/DatePicker.vue';
+    import Epi                  from './Epis.vue';
+    import OSMixin              from '../mixins/OS';
+    import Technitioans         from './Technitians.vue';
+    import OSCreate             from '../components/OSCreate.vue';
+    import {OS}                 from '../forms/OS';
 
     export default {
 
@@ -226,7 +227,11 @@
 
                 statusItems: statusItems.items,
 
-                selected: null
+                selected: null,
+
+                endDate: '',
+
+                technitians: []
 
             }
 
@@ -281,7 +286,7 @@
 
                     this.selected = items[items.length -1].value;
 
-                    console.log('data-reload');
+                    console.log(this.selected);
 
                 });
 
@@ -291,9 +296,27 @@
 
                 this.setOs(this.selected);
 
-                console.log(this.selected);
-
                 this.status = this.selected.status;
+
+            },
+
+            getDate(value) {
+
+                console.log(value);
+
+            },
+
+            dateChanged(value) {
+
+                this.endDate = value;
+
+                console.log(value);
+
+            },
+
+            setTech(value) {
+
+                this.technitians = value;
 
             }
 

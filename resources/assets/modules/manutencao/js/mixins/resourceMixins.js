@@ -30,6 +30,12 @@ export default {
 
         },
 
+        updateOrder(id, item) {
+
+            return this.resource.update({query: 'solicitacao', id: id}, item);
+
+        },
+
         updateResource(item) {
 
             return this.$http.update('manutencao/update', item);

@@ -133,7 +133,8 @@
 
                     description: '',
                     created_at: '',
-                    status: ''
+                    status: '',
+                    service: {}
 
                 }
 
@@ -194,6 +195,8 @@
                 this.service.created_at = service.created_at;
 
                 this.service.status = service.status;
+
+                this.service.service = service;
 
             }
 

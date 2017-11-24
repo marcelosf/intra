@@ -53,6 +53,15 @@ class ManutencaoController extends Controller
 
     }
 
+    public function update(Request $request, $solicitacao)
+    {
+
+        $status = $this->solicitacao->find($solicitacao)->update($request->all());
+
+        return compact('status');
+
+    }
+
     public function getOss($id)
     {
 

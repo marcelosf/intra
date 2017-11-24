@@ -41,7 +41,7 @@
 
     export default {
 
-        props: ['fieldTitle', 'readonly', 'value'],
+        props: ['fieldTitle', 'os'],
 
         data() {
 
@@ -54,6 +54,18 @@
                 locale: 'pt-br',
 
                 formatted: null
+
+            }
+
+        },
+
+        watch: {
+
+            os () {
+
+                this.$emit('loaded', this.date);
+
+                console.log('date-loaded');
 
             }
 

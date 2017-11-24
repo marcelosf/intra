@@ -4,7 +4,13 @@
 
         <v-dialog v-model="dialog" persistent width="50%">
 
-            <v-btn primary class="white--text" slot="activator">Nova OS</v-btn>
+                <v-btn slot="activator" flat>
+
+                    <v-icon>add</v-icon>
+
+                    Criar
+
+                </v-btn>
 
             <v-layout row wrap>
 
@@ -250,7 +256,7 @@
 
                 }
 
-            }
+            },
 
         }
 

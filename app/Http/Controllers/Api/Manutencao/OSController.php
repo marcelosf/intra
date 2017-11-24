@@ -38,6 +38,19 @@ class OSController extends Controller
 
     }
 
+    public function update(Request $request, $os)
+    {
+
+        $os = $this->os->find($os);
+
+        $os->update($request->all());
+
+        $os->tecnicos()->sync($request->tecnicos);
+
+        $os->epis()->sync($request->epis);
+
+    }
+
     public function getEpis($os)
     {
 
@@ -66,7 +79,6 @@ class OSController extends Controller
         }
 
     }
-
 
     protected function attachTecnicos(Request $request, $os)
     {

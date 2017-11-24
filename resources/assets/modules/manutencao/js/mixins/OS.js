@@ -30,7 +30,7 @@ export default {
 
             this.id = os.id;
 
-            this.service = os.descricao;
+            this.service = os.tecnica.nome;
 
             this.technitians = [];
 

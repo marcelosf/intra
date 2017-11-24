@@ -74,8 +74,11 @@ Route::middleware(['cors'])->group(function (){
 
         Route::get('/tecnica', 'Api\Manutencao\TecnicaController@index')->name('manutencao.tecnica');
 
+        Route::put('/solicitacao/{id}', 'Api\Manutencao\ManutencaoController@update')->name('manutencao.update');
 
         Route::post('/os', 'Api\Manutencao\OSController@store')->name('mnutencao.os.store');
+
+        Route::put('/os/update', 'Api\Manutencao\OSontroller@update')->name('manutencao.os.update');
 
     });
 
